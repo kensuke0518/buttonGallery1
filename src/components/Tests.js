@@ -16,16 +16,19 @@ function Box(props) {
         <div className="box" style={style}>こんにちは</div>
     )
 }
-
-const aaa = (ev, kansu) => {
-    kansu(ev.target.value);
-}
-
 function BgColor(props) {
     return (
         <div>
             <div><input type="color" value={props.bgcolor} onChange={props.doBgChange} /></div>
             <div>{props.bgcolor}</div>
+        </div>
+    )
+}
+function Padding(props) {
+    return (
+        <div>
+            <input id="rangeInput" type="range" value={props.padding} min="0" max="100" onChange={props.doPaddingChange} />
+            <div>{props.padding}</div>
         </div>
     )
 }
@@ -52,10 +55,7 @@ export function Tests() {
         <>
             <Box bgcolor={state.bgcolor} padding={state.padding} />
             <BgColor bgcolor={state.bgcolor} doBgChange={doBgChange} />
-            <div>
-                <input id="rangeInput" type="range" value={state.padding} min="0" max="100" onChange={doPaddingChange} />
-                <div>{state.padding}</div>
-            </div>
+            <Padding padding={state.padding} doPaddingChange={doPaddingChange} />
         </>
     )
 }
