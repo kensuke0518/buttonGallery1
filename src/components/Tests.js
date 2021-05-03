@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 
 function Box(props) {
     const style = {
         display: 'inline-block',
-        padding: props.padding + 'px',
-        background: props.bgcolor,
+        padding: props.style.padding + 'px',
+        background: props.style.bgcolor,
         color: '#fff',
     }
     /*
@@ -33,29 +33,31 @@ function Padding(props) {
     )
 }
 
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'bg':
+            return {
+                ...state,
+                bgcolor:action.event.target.value
+            }
+        case 'pd':
+            return {
+                ...state,
+                padding: action.event.target.value
+            }
+    }
+}
 
 export function Tests() {
-    const [state, setState] = useState({
+    const [state, dispatch] = useReducer(reducer,{
         bgcolor: '#000000',
         padding:10,
     })
-    const doBgChange = e => {
-        setState({
-            ...state, //こちらを先に書かなければいけない。
-            bgcolor:e.target.value,
-        });
-    }
-    const doPaddingChange = e => {
-        setState({
-            ...state, //こちらを先に書かなければいけない。
-            padding: e.target.value,
-        });
-    }
     return (
         <>
-            <Box bgcolor={state.bgcolor} padding={state.padding} />
-            <BgColor bgcolor={state.bgcolor} doBgChange={doBgChange} />
-            <Padding padding={state.padding} doPaddingChange={doPaddingChange} />
+            <Box style={state} />
+            <BgColor bgcolor={state.bgcolor} doBgChange={e=>dispatch({type:'bg',event:e})} />
+            <Padding padding={state.padding} doPaddingChange={e => dispatch({ type: 'pd', event: e })} />
         </>
     )
 }
