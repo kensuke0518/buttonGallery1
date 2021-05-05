@@ -1,9 +1,9 @@
-import { Tests } from './components/Tests';
+import { Integrate } from './components/Integrate';
 
 function App() {
   return (
     <div className="App">
-      <Tests />
+      <Integrate />
     </div>
   );
 }
