@@ -1,5 +1,9 @@
 import { useState, useEffect, useReducer } from 'react';
-import { Character, BgColor, Padding, Border, BorderRadius } from './Block';
+import { Character } from './blocks/Character';
+import { BgColor } from './blocks/BgColor';
+import { Padding } from './blocks/Padding';
+import { Border } from './blocks/Border';
+import { BorderRadius } from './blocks/BorderRadius';
 import { Preview } from './Preview';
 import { Cascade } from './Cascade';
 
@@ -54,15 +58,6 @@ const reducer = (state, action) => {
                     color: action.event.target.value,
                 }
             }
-        /*case 'borHV':
-            return {
-                ...state,
-                borderRadius: {
-                    ...state.borderRadius,
-                    horizonVertical:action.event.target.checked
-                }
-            }
-            */
     }
 }
 
@@ -77,13 +72,6 @@ export function Integrate() {
             size: '3',
             color: '#ff0000',
         },
-        /*
-        borderRadius: {
-            horizonVertical: false,
-            a: '10',
-            b: '10',
-        },
-        */
     })
     return (
         <>

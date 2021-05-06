@@ -1,52 +1,4 @@
 import { useState, useEffect, useReducer } from 'react';
-//文言
-export function Character(props) {
-    return (
-        <div>
-            <input type="text" value={props.character} onChange={props.doAction} />
-        </div>
-    )
-}
-
-//背景色
-export function BgColor(props) {
-    return (
-        <div>
-            <div><input type="color" value={props.bgcolor} onChange={props.doAction} /></div>
-            <div>{props.bgcolor}</div>
-        </div>
-    )
-}
-
-//余白
-export function Padding(props) {
-    return (
-        <div>
-            <input type="range" value={props.padding} min="0" max="100" onChange={props.doAction} />
-            <div>{props.padding}</div>
-        </div>
-    )
-}
-
-//ボーダー
-export function Border(props) {
-    //e.target.checked
-    //e.target.value
-    return (
-        <div>
-            <div>
-                <input type="checkbox" name="" value="top" id="borderTop" onClick={props.doAction} />上
-                <input type="checkbox" name="" value="bottom" id="borderBottom" onClick={props.doAction} />下
-                <input type="checkbox" name="" value="left"id="borderLeft" defaultChecked onClick={props.doAction} />左
-                <input type="checkbox" name="" value="right" id="borderRight" onClick={props.doAction} />右
-            </div>
-            <input type="range" value={props.border.size} min="0" max="10" onChange={props.doSizeAction} />
-            <div>{props.border.size}</div>
-            <input type="color" value={props.border.color} onChange={props.doColorAction} />
-            <div>{props.border.color}</div>
-        </div>
-    )
-}
 
 //角丸
 //https://coliss.com/articles/build-websites/operation/css/css-border-radius-can-do-that.html
@@ -150,7 +102,6 @@ export function BorderRadius(props) {
             if (bbb[aaa].check === true) {
                 ddd = `${ddd} ${bbb[aaa].size}${bbb[aaa].unit}`
             }
-            //console.log(ddd);
         }
         return { borderRadius: ddd }
     }

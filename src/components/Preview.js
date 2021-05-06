@@ -23,15 +23,9 @@ export function Preview(props) {
         color: '#fff',
         textDecoration: 'none',
     }
-    console.log(style)
     const stopLink = e => {
         e.preventDefault();
     }
-    /*
-    useEffect(() => {
-        console.log(style)
-    })
-    */
     return (
         <a href="" onClick={stopLink} className="preview" style={style}>{props.style.character}</a>
     )
