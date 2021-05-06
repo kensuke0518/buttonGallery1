@@ -1,6 +1,6 @@
 import React,{ useState, useEffect, useReducer } from 'react';
 import { Character } from './blocks/Character';
-import { BgColor } from './blocks/BgColor';
+import { Background } from './blocks/Background';
 import { Padding } from './blocks/Padding';
 import { Border } from './blocks/Border';
 import { BorderRadius } from './blocks/BorderRadius';
@@ -10,15 +10,13 @@ import { Cascade } from './Cascade';
 export const Sheet = React.createContext()
 
 //ステート
+//ステートには「プロパティ名:{プロパティ:値,...}というオブジェクトを渡して、Preview.jsで展開する。
 const initialState = {
-    character: '送信',
-    bgcolor: '#000000',
-    padding: '10',
-    border: {
-        check: ['left'],
-        size: '3',
-        color: '#ff0000',
-    }
+    character: {character:'送信'},
+    background: {},
+    padding: {},
+    border: {}, //複数borderが指定されたオブジェクトが渡される。
+    borderRadius:{}
 }
 
 //レデューサー（CSSの取得のみにしたい）
@@ -27,57 +25,29 @@ const reducer = (state, action) => {
         case 'br': {
             return {
                 ...state,
-                borderRadius:action.event
+                borderRadius: action.value
             }
         }
-        /*case 'bg':
+        case 'bd': {
             return {
-                ...state,
-                bgcolor:action.event.target.value
+                border:action.value
             }
+        }
         case 'pd':
             return {
                 ...state,
-                padding: action.event.target.value
+                padding: action.value
             }
-        case 'chara':
+        case 'bg':
             return {
                 ...state,
-                character: action.event.target.value
+                background:action.value
             }
-        case 'bdCheck':
-            //ボーダーの方向
-            const [...check] = state.border.check;
-            const num = check.indexOf(action.event.target.value);
-            if (num === -1) {
-                check.push(action.event.target.value)
-            }
-            else{
-                check.splice(num, 1)
-            }
+        case 'ch':
             return {
                 ...state,
-                border: {
-                    ...state.border,
-                    check: check,
-                }
+                character: action.value
             }
-        case 'bdSize':
-            return {
-                ...state,
-                border: {
-                    ...state.border,
-                    size: action.event.target.value,
-                }
-            }
-        case 'bdColor':
-            return {
-                ...state,
-                border: {
-                    ...state.border,
-                    color: action.event.target.value,
-                }
-            }*/
     }
 }
 
@@ -86,13 +56,13 @@ export function Integrate() {
     const [state, dispatch] = useReducer(reducer, initialState);
     return (
         <Sheet.Provider value={[state, dispatch]}>
-            <Preview style={state} />
+            <Preview />
             <BorderRadius />
-            {/*<Character character={ state.character } doAction={e => dispatch({ type: 'chara', event: e }) } />
-            <BgColor bgcolor={state.bgcolor} doAction={e=>dispatch({type:'bg',event:e})} />
-            <Padding padding={state.padding} doAction={e => dispatch({ type: 'pd', event: e })} />
-            <Border border={state.border} doColorAction={e => dispatch({ type: 'bdColor', event: e })} doSizeAction={e => dispatch({ type: 'bdSize', event: e })} doAction={e => dispatch({ type: 'bdCheck', event: e })} />
-            <Cascade cascade={state} />*/}
+            <Border />
+            <Padding />
+            <Background />
+            <Character />
+            <Cascade />
         </Sheet.Provider>
     )
 }

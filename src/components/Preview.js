@@ -1,32 +1,23 @@
-function border(bdStyle) {
-    const obj = {}
-    if (bdStyle.check.length === 4) {
-        obj['border'] = `${bdStyle.size}px solid ${bdStyle.color}`
-    }
-    else if (0 < bdStyle.check.length < 4) {
-        bdStyle.check.map(tblr => {
-            const newTblr = tblr.charAt(0).toUpperCase() + tblr.slice(1);
-            obj['border' + newTblr] = `${bdStyle.size}px solid ${bdStyle.color}`
-        })
-    }
-    return obj;
-}
+import { useState, useCallback, useContext } from 'react';
+import { Sheet } from './Integrate';
 
-export function Preview(props) {
-    const styleState = props.style;
+export function Preview() {
+    const [styleState, setStyleState] = useContext(Sheet)
 
     const style = {
-        display: 'inline-block',
-        padding: styleState.padding + 'px',
-        background: styleState.bgcolor,
-        ...border(styleState.border),
+        ...styleState.border,
+        ...styleState.borderRadius,
+        ...styleState.padding,
+        ...styleState.background,
         color: '#fff',
+        display: 'inline-block',
         textDecoration: 'none',
     }
-    const stopLink = e => {
-        e.preventDefault();
-    }
+    
+    const stopLink = e => e.preventDefault();
+    
+    //console.log(styleState.character.character )
     return (
-        <a href="" onClick={stopLink} className="preview" style={style}>{props.style.character}</a>
+        <a href="" onClick={stopLink} className="preview" style={style}>送信</a>
     )
 }

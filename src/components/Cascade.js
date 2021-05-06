@@ -1,19 +1,29 @@
+import { useState, useCallback, useContext } from 'react';
+import { Sheet } from './Integrate';
+
+
 //CSS抽出
-export function Cascade(props) {
+export function Cascade() {
+    const [styleState, setStyleState] = useContext(Sheet)
+
     const style = {
         width: '20em',
         height: '10em',
     }
-    const bg = 'background:' + props.cascade.bgcolor;
-    const pd = 'padding:' + props.cascade.padding + 'px';
+
+    console.log(styleState)
+/*
+    const bg = 'background:' + cascade.bgcolor;
+    const pd = 'padding:' + cascade.padding + 'px';
     const text =
         `.preview{
     ${bg};
-    ${props.cascade.padding === '0' ? '' : pd+';'}
+    ${cascade.padding === '0' ? '' : pd+';'}
 }`
+*/
     return (
         <div>
-            <textarea style={style} value={text} readOnly></textarea>
+            <textarea style={style} readOnly></textarea>
         </div>
     )
 }
