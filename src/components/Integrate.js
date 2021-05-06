@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from 'react';
+import React,{ useState, useEffect, useReducer } from 'react';
 import { Character } from './blocks/Character';
 import { BgColor } from './blocks/BgColor';
 import { Padding } from './blocks/Padding';
@@ -7,10 +7,30 @@ import { BorderRadius } from './blocks/BorderRadius';
 import { Preview } from './Preview';
 import { Cascade } from './Cascade';
 
-//レデューサー
+export const Sheet = React.createContext()
+
+//ステート
+const initialState = {
+    character: '送信',
+    bgcolor: '#000000',
+    padding: '10',
+    border: {
+        check: ['left'],
+        size: '3',
+        color: '#ff0000',
+    }
+}
+
+//レデューサー（CSSの取得のみにしたい）
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'bg':
+        case 'br': {
+            return {
+                ...state,
+                borderRadius:action.event
+            }
+        }
+        /*case 'bg':
             return {
                 ...state,
                 bgcolor:action.event.target.value
@@ -57,31 +77,22 @@ const reducer = (state, action) => {
                     ...state.border,
                     color: action.event.target.value,
                 }
-            }
+            }*/
     }
 }
 
 //ステートと統合
 export function Integrate() {
-    const [state, dispatch] = useReducer(reducer, {
-        character: '送信',
-        bgcolor: '#000000',
-        padding: '10',
-        border:{
-            check: ['left'],
-            size: '3',
-            color: '#ff0000',
-        },
-    })
+    const [state, dispatch] = useReducer(reducer, initialState);
     return (
-        <>
+        <Sheet.Provider value={[state, dispatch]}>
             <Preview style={state} />
-            <Character character={ state.character } doAction={e => dispatch({ type: 'chara', event: e }) } />
+            <BorderRadius />
+            {/*<Character character={ state.character } doAction={e => dispatch({ type: 'chara', event: e }) } />
             <BgColor bgcolor={state.bgcolor} doAction={e=>dispatch({type:'bg',event:e})} />
             <Padding padding={state.padding} doAction={e => dispatch({ type: 'pd', event: e })} />
             <Border border={state.border} doColorAction={e => dispatch({ type: 'bdColor', event: e })} doSizeAction={e => dispatch({ type: 'bdSize', event: e })} doAction={e => dispatch({ type: 'bdCheck', event: e })} />
-            <BorderRadius />
-            <Cascade cascade={state} />
-        </>
+            <Cascade cascade={state} />*/}
+        </Sheet.Provider>
     )
 }

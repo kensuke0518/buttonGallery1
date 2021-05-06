@@ -1,12 +1,17 @@
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useCallback, useContext } from 'react';
+import { Sheet } from '../Integrate';
 
 //角丸
 //https://coliss.com/articles/build-websites/operation/css/css-border-radius-can-do-that.html
 export function BorderRadius(props) {
+    //CSSレデューサーを取得
+    const [styleState, setStyleState] = useContext(Sheet);
+
     const style = {
         background: '#24c7f0',
         padding: '2em'
     }
+
     const [state, setState] = useState({
         borderRadius: {
             horizonVertical: false,
@@ -34,6 +39,8 @@ export function BorderRadius(props) {
             }
         },
     })
+
+    //水平垂直
     const doHV = e => {
         setState({
             ...state,
@@ -43,10 +50,10 @@ export function BorderRadius(props) {
             }
         })
     }
+
+    //各頂点を使うかどうか
     const doUse = e => {
-        console.log(e.target.checked)
         //チェックされた要素がaかbかを判断する
-        console.log(e.target.value)
         const targetValue = e.target.value;
         setState({
             ...state,
@@ -62,6 +69,8 @@ export function BorderRadius(props) {
             }
         })
     }
+
+    //サイズの調整
     const doSize = e => {
         const targetValue = e.target.name;
         setState({
@@ -78,6 +87,8 @@ export function BorderRadius(props) {
             }
         })
     }
+
+    //単位の設定
     const doRadio = e => {
         console.log(e.target.name)
         const targetValue = e.target.name;
@@ -95,6 +106,8 @@ export function BorderRadius(props) {
             }
         })
     }
+
+    //最終的なCSSの抽出
     const borCSS = () => {
         const bbb = state.borderRadius.style;
         let ddd = '';
