@@ -1,4 +1,4 @@
-import { useState, useCallback, useContext } from 'react';
+import { useState, useCallback, useContext, useEffect } from 'react';
 import { Sheet } from '../Integrate';
 
 //背景色
@@ -6,22 +6,44 @@ export function Background() {
     const [styleState, setStyleDispatch] = useContext(Sheet);
 
     const [state, setState] = useState({
-        bgcolor: '',
+        bgcolor: '#189bdc',
     })
 
+    //useEffect(() => bgCSS());
+
     const bgColorFunc = e => {
-        setState({
+        const newState = {
             ...state,
-            bgcolor:e.target.value,
+            bgcolor: e.target.value,
+        }
+        setState({ //setStateが遅い。。。
+            ...newState,
         })
-        bgFunc();
+        bgCSS(newState);
     }
 
-    const bgFunc = () => {
+    const bgCSS = (newState = state) => {
+        //オブジェクトで示す
         const obj = {}
-        obj['background'] = state.bgcolor
-        setStyleDispatch({ type: 'bg', value: obj });
+        obj['background'] = newState.bgcolor
+
+        //CSSで示す
+        let css = 'background:';
+        for (let property in obj) {
+            css = css + obj[property];
+        }
+        css = `${css}\n`
+
+        //ストアへ渡す形を作る
+        const value = {
+            obj,
+            css
+        }
+        //レデューサーへ（あるいはアクションクリエイターへ）渡す
+        setStyleDispatch({ type: 'bg', value });
     }
+
+    useEffect(()=>{bgCSS()},[])
 
     return (
         <div>

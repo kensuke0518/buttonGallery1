@@ -1,4 +1,4 @@
-import { useState, useCallback, useContext } from 'react';
+import { useState, useCallback, useContext, useEffect } from 'react';
 import { Sheet } from '../Integrate';
 
 //文言
@@ -10,16 +10,19 @@ export function Character() {
     })
 
     const characterFunc = e => {
-        setState({
+        const newState = {
             ...state,
             character: e.target.value,
+        }
+        setState({
+            ...newState,
         })
-        chFunc();
+        chFunc(newState);
     }
 
-    const chFunc = () => {
+    const chFunc = (newState = state) => {
         const obj = {}
-        obj['character'] = state.character
+        obj['character'] = newState.character
         setStyleDispatch({ type: 'ch', value: obj });
     }
 

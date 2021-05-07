@@ -1,4 +1,4 @@
-import { useState, useCallback, useContext } from 'react';
+import { useState, useCallback, useContext, useEffect } from 'react';
 import { Sheet } from '../Integrate';
 
 //余白
@@ -11,18 +11,39 @@ export function Padding() {
     })
 
     const sizeFunc = e => {
-        setState({
+        const newState = {
             ...state,
-            size:e.target.value,
+            size: e.target.value,
+        }
+        setState({
+            ...newState
         })
-        pdFunc();
+        pdCSS(newState);
     }
 
-    const pdFunc = () => {
+    const pdCSS = (newState = state) => {
+        console.log(newState)
+        //オブジェクトで示す
         const obj = {}
-        obj['padding'] = `${state.size}${state.unit}`
-        setStyleDispatch({type:'pd',value:obj})
+        obj['padding'] = `${newState.size}${newState.unit}`
+
+        //CSSで示す
+        let css = 'padding:';
+        for (let property in obj) {
+            css = css + obj[property];
+        }
+        css = `${css}\n`
+
+        //ストアへ渡す形を作る
+        const value = {
+            obj,
+            css
+        }
+
+        setStyleDispatch({ type: 'pd', value })
     }
+
+    useEffect(() => { pdCSS() }, [])
 
     return (
         <div>

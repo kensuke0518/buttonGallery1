@@ -6,24 +6,25 @@ import { Sheet } from './Integrate';
 export function Cascade() {
     const [styleState, setStyleState] = useContext(Sheet)
 
+    //const newStyle = styleState.newStyle;
+
     const style = {
         width: '20em',
         height: '10em',
     }
 
-    console.log(styleState)
-/*
-    const bg = 'background:' + cascade.bgcolor;
-    const pd = 'padding:' + cascade.padding + 'px';
-    const text =
-        `.preview{
-    ${bg};
-    ${cascade.padding === '0' ? '' : pd+';'}
-}`
-*/
+    let chara = '';
+    for (let p in styleState) {
+        if (styleState[p].css !== undefined) {
+            chara = chara + styleState[p].css;
+        }
+    }
+
+    const text = '.preview{\n' + chara + '}';
+
     return (
         <div>
-            <textarea style={style} readOnly></textarea>
+            <textarea style={style} value={text} readOnly></textarea>
         </div>
     )
 }

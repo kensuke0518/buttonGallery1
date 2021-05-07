@@ -1,4 +1,4 @@
-import { useState, useCallback, useContext } from 'react';
+import { useState, useCallback, useContext, useEffect } from 'react';
 import { Sheet } from '../Integrate';
 
 //ボーダー
@@ -21,53 +21,78 @@ export function Border() {
         else {
             check.splice(num, 1)
         }
-        setState({
+        const newState = {
             ...state,
             check: check,
+        }
+        setState({
+            ...newState,
         })
-        bdCSS();
+        bdCSS(newState);
     }
 
     //サイズ
     const sizeFunc = e => {
-        setState({
+        const newState = {
             ...state,
             size: e.target.value,
+        }
+        setState({
+            ...newState,
         })
-        bdCSS();
+        bdCSS(newState);
    }
 
     //カラー
     const colorFunc = e => {
-        setState({
+        const newState = {
             ...state,
             color: e.target.value,
+        }
+        setState({
+            ...newState,
         })
-        bdCSS();
+        bdCSS(newState);
     }
 
     //CSS
-    function bdCSS() {
+    function bdCSS(newState = state) {
+        //オブジェクトで示す。
         const obj = {}
-        if (state.check.length === 4) {
-            obj['border'] = `${state.size}px solid ${state.color}`
+        if (newState.check.length === 4) {
+            obj['border'] = `${newState.size}px solid ${newState.color}`
         }
-        else if (1 < state.check.length < 4) {
-            state.check.map(tblr => {
+        else if (1 < newState.check.length < 4) {
+            newState.check.map(tblr => {
                 const newTblr = tblr.charAt(0).toUpperCase() + tblr.slice(1);
-                obj['border' + newTblr] = `${state.size}px solid ${state.color}`
+                obj['border' + newTblr] = `${newState.size}px solid ${newState.color}`
             })
         }
-        else if (state.check.length === 0) {
+        else if (newState.check.length === 0) {
             obj = {}
         }
-        if (state.size === 0) {
+        if (newState.size === 0) {
             obj = {}
         }
-        console.log(obj)
-        setStyleDispatch({ type: 'bd', value: obj });
+
+        //CSSで示す
+        let css = '';
+        for (let property in obj) {
+            let direction = property.replace(/border/g, '').toLowerCase();
+            direction === '' ? direction = 'border' : direction = `border-${direction}`;
+            css = css + direction + ': ' + obj[property] + '\n';
+        }
+        
+        //ストアへ渡す形を作る
+        const value = {
+            obj,
+            css
+        }
+        
+        setStyleDispatch({ type: 'bd', value });
     }
 
+    useEffect(() => { bdCSS() }, [])
     
     return (
         <div>
@@ -84,10 +109,3 @@ export function Border() {
         </div>
     )
 }
-
-
-/**
- */
-
-
-

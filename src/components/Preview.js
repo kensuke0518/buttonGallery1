@@ -4,20 +4,21 @@ import { Sheet } from './Integrate';
 export function Preview() {
     const [styleState, setStyleState] = useContext(Sheet)
 
+    //const newStyle = styleState.newStyle
+
     const style = {
-        ...styleState.border,
-        ...styleState.borderRadius,
-        ...styleState.padding,
-        ...styleState.background,
+        ...styleState.border.obj,
+        ...styleState.borderRadius.obj,
+        ...styleState.padding.obj,
+        ...styleState.background.obj,
         color: '#fff',
         display: 'inline-block',
         textDecoration: 'none',
     }
     
     const stopLink = e => e.preventDefault();
-    
-    //console.log(styleState.character.character )
+
     return (
-        <a href="" onClick={stopLink} className="preview" style={style}>送信</a>
+        <a href="" onClick={stopLink} className="preview" style={style}>{styleState.character.character}</a>
     )
 }

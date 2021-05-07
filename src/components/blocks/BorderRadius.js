@@ -1,4 +1,4 @@
-import { useState, useCallback, useContext } from 'react';
+import { useState, useCallback, useContext, useEffect } from 'react';
 import { Sheet } from '../Integrate';
 
 //角丸
@@ -40,9 +40,12 @@ export function BorderRadius() {
 
     //水平垂直
     const horizonVerticalFunc = e => {
-        setState({
+        const newState = {
             ...state,
             horizonVertical: e.target.checked
+        }
+        setState({
+            ...newState,
         })
     }
 
@@ -50,7 +53,7 @@ export function BorderRadius() {
     const radiusUseFunc = e => {
         //チェックされた要素がaかbかを判断する
         const targetValue = e.target.value;
-        setState({
+        const newState = {
             ...state,
             style: {
                 ...state.style,
@@ -59,14 +62,17 @@ export function BorderRadius() {
                     check: e.target.checked
                 }
             }
+        }
+        setState({
+            ...newState,
         })
-        brCSS();
+        brCSS(newState);
     }
 
     //サイズの調整
     const sizeFunc = e => {
         const targetValue = e.target.name;
-        setState({
+        const newState = {
             ...state,
             style: {
                 ...state.style,
@@ -75,14 +81,17 @@ export function BorderRadius() {
                     size: e.target.value
                 }
             }
+        }
+        setState({
+            ...newState,
         })
-        brCSS();
+        brCSS(newState);
     }
 
     //単位の設定
     const unitFunc = e => {
         const targetValue = e.target.name;
-        setState({
+        const newState = {
             ...state,
             style: {
                 ...state.style,
@@ -91,14 +100,17 @@ export function BorderRadius() {
                     unit: e.target.value
                 }
             }
+        }
+        setState({
+            ...newState,
         })
-        brCSS();
+        brCSS(newState);
     }
 
     //最終的なCSSの抽出
-    const brCSS = () => {
+    const brCSS = (newState = state) => {
         const obj = {}
-        const stateStyles = state.style;
+        const stateStyles = newState.style;
         let brValue = '';
         for (let i in stateStyles) {
             if (stateStyles[i].check === true) {
@@ -106,8 +118,25 @@ export function BorderRadius() {
             }
         }
         obj['borderRadius'] = brValue;
-        setStyleDispatch({ type: 'br', value: obj })
+
+        //CSSで示す
+        let css = 'border-radius:';
+        for (let property in obj) {
+            css = css + obj[property];
+        }
+        css = `${css}\n`
+
+        //ストアへ渡す形を作る
+        const value = {
+            obj,
+            css
+        }
+
+        setStyleDispatch({ type: 'br', value })
     }
+
+    useEffect(() => { brCSS() }, [])
+
     return (
         <div style={style}>
             <div>
