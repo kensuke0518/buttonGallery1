@@ -96,6 +96,7 @@ export function Border() {
     
     return (
         <div>
+            <p style={styleState.componentStyle.heading.a}>ボーダー</p>
             <div>
                 <input type="checkbox" name="" value="top" id="borderTop" onClick={directionFunc} />上
                 <input type="checkbox" name="" value="bottom" id="borderBottom" onClick={directionFunc} />下
@@ -103,7 +104,7 @@ export function Border() {
                 <input type="checkbox" name="" value="right" id="borderRight" onClick={directionFunc} />右
             </div>
             <input type="range" value={state.size} min="0" max="10" onChange={sizeFunc} />
-            <div>{state.size}</div>
+            <div>{state.size}px</div>
             <input type="color" value={state.color} onChange={colorFunc} />
             <div>{state.color}</div>
         </div>

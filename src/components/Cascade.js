@@ -6,17 +6,17 @@ import { Sheet } from './Integrate';
 export function Cascade() {
     const [styleState, setStyleState] = useContext(Sheet)
 
-    //const newStyle = styleState.newStyle;
+    const newStyle = styleState.newStyle;
 
-    const style = {
+    const areaStyle = {
         width: '20em',
         height: '10em',
     }
 
     let chara = '';
-    for (let p in styleState) {
-        if (styleState[p].css !== undefined) {
-            chara = chara + styleState[p].css;
+    for (let p in newStyle) {
+        if (newStyle[p].css !== undefined) {
+            chara = chara + newStyle[p].css;
         }
     }
 
@@ -24,7 +24,8 @@ export function Cascade() {
 
     return (
         <div>
-            <textarea style={style} value={text} readOnly></textarea>
+            <p style={styleState.componentStyle.heading.a}>下のコードをコピーして貼り付けてください</p>
+            <textarea style={areaStyle} value={text} readOnly></textarea>
         </div>
     )
 }

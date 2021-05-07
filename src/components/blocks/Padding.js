@@ -22,7 +22,6 @@ export function Padding() {
     }
 
     const pdCSS = (newState = state) => {
-        console.log(newState)
         //オブジェクトで示す
         const obj = {}
         obj['padding'] = `${newState.size}${newState.unit}`
@@ -47,8 +46,9 @@ export function Padding() {
 
     return (
         <div>
+            <p style={styleState.componentStyle.heading.a}>余白</p>
             <input type="range" value={state.size} min="0" max="100" onChange={sizeFunc} />
-            <div>{state.size}</div>
+            <div>{state.size}px</div>
         </div>
     )
 }

@@ -34,19 +34,25 @@ export function Background() {
         }
         css = `${css}\n`
 
-        //ストアへ渡す形を作る
+        //CSSの状態をレデューサーへ（あるいはアクションクリエイターへ）渡す
         const value = {
             obj,
             css
         }
-        //レデューサーへ（あるいはアクションクリエイターへ）渡す
         setStyleDispatch({ type: 'bg', value });
+
+        //各項目の状態をレデューサーへ（あるいはアクションクリエイターへ）渡す
+        const valueUnit = {
+            background: state
+        }
+        setStyleDispatch({ type: 'cu', value: valueUnit });
     }
 
     useEffect(()=>{bgCSS()},[])
 
     return (
         <div>
+            <p style={styleState.componentStyle.heading.a}>ボタンの背景色</p>
             <div><input type="color" value={state.bgcolor} onChange={bgColorFunc} /></div>
             <div>{state.bgcolor}</div>
         </div>

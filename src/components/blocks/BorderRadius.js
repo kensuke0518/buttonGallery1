@@ -7,11 +7,6 @@ export function BorderRadius() {
     //CSSレデューサーを取得
     const [styleState, setStyleDispatch] = useContext(Sheet);
     
-    const style = {
-        background: '#24c7f0',
-        padding: '2em'
-    }
-
     const [state, setState] = useState({
         horizonVertical: false,
         style: {
@@ -138,7 +133,8 @@ export function BorderRadius() {
     useEffect(() => { brCSS() }, [])
 
     return (
-        <div style={style}>
+        <div>
+            <p style={styleState.componentStyle.heading.a}>角丸</p>
             <div>
                 <input type="checkbox" onClick={horizonVerticalFunc} />「水平半径/垂直半径」を使用する。
             </div>

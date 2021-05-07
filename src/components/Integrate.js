@@ -6,6 +6,7 @@ import { Border } from './blocks/Border';
 import { BorderRadius } from './blocks/BorderRadius';
 import { Preview } from './Preview';
 import { Cascade } from './Cascade';
+import { Sample } from './samples/Sample';
 
 export const Sheet = React.createContext()
 
@@ -13,24 +14,44 @@ export const Sheet = React.createContext()
 //ステートには「プロパティ名:{プロパティ:値,...}というオブジェクトを渡して、Preview.jsで展開する。
 //作業開始前にまず何より「ステートの設計」を重視してやった方がいい。あとで全てのコンポーネントに支障が出る。
 const initialState = {
-    character: {character:'送信'},
-    background: {
-        obj:{}, //Preview用
-        css:'' //Cascade用
+    character: { character: '送信' },
+    newStyle: {
+        background: {
+            obj: {}, //Preview用
+            css: '' //Cascade用
+        },
+        padding: {
+            obj: {}, //Preview用
+            css: '' //Cascade用
+        },
+        border: { //複数borderが指定されたオブジェクトが渡される。
+            obj: {}, //Preview用
+            css: '' //Cascade用
+        },
+        borderRadius: {
+            obj: {}, //Preview用
+            css: '' //Cascade用
+        },
+        otherStyle: {
+            obj: {}, //Preview用
+            css: '' //Cascade用
+        }
     },
-    padding: {
-        obj: {}, //Preview用
-        css: '' //Cascade用
+    componentUnit: {
+        background: {},
+        padding: {},
+        border: {},
+        borderRadius: {},
     },
-    border: { //複数borderが指定されたオブジェクトが渡される。
-        obj: {}, //Preview用
-        css: '' //Cascade用
-    },
-    borderRadius: {
-        obj: {}, //Preview用
-        css: '' //Cascade用
+    componentStyle: {
+        heading: {
+            a: {
+                    borderLeft: '4px solid #58d510',
+                    background: '#fff',
+                    paddingLeft: '.5em'
+            }
+        }
     }
-    
 }
 
 //レデューサー（CSSの取得のみにしたい）
@@ -39,28 +60,58 @@ const reducer = (state, action) => {
         case 'br': {
             return {
                 ...state,
-                borderRadius: action.value
+                newStyle: {
+                    ...state.newStyle,
+                    borderRadius: action.value
+                }
             }
         }
         case 'bd': 
             return {
                 ...state,
-                border:action.value
+                newStyle: {
+                    ...state.newStyle,
+                    border:action.value
+                }
             }
         case 'pd':
             return {
                 ...state,
-                padding: action.value
+                newStyle: {
+                    ...state.newStyle,
+                    padding: action.value
+                }
             }
         case 'bg':
             return {
                 ...state,
-                background:action.value
+                newStyle: {
+                    ...state.newStyle,
+                    background: action.value
+                }
             }
         case 'ch':
             return {
                 ...state,
                 character: action.value
+            }
+        case 'cu': {
+            console.log(action.value)
+            return {
+                ...state,
+                componentUnit: {
+                    ...state.componentUnit,
+                    ...action.value
+                }
+            }
+        }
+        case 'sample':
+            return {
+                ...state,
+                newStyle: {
+                    ...state.newStyle,
+                    ...action.value
+                }
             }
     }
 }
@@ -70,13 +121,14 @@ export function Integrate() {
     const [state, dispatch] = useReducer(reducer, initialState);
     return (
         <Sheet.Provider value={[state, dispatch]}>
-            <BorderRadius />
-            <Border />
-            <Padding />
-            <Background />
-            <Character />
+            <Sample />
             <Preview />
             <Cascade />
+            <Character />
+            <Background />
+            <Padding />
+            <Border />
+            <BorderRadius />
         </Sheet.Provider>
     )
 }
