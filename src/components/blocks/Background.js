@@ -9,8 +9,6 @@ export function Background() {
         bgcolor: '#189bdc',
     })
 
-    //useEffect(() => bgCSS());
-
     const bgColorFunc = e => {
         const newState = {
             ...state,
@@ -32,29 +30,27 @@ export function Background() {
         for (let property in obj) {
             css = css + obj[property];
         }
-        css = `${css}\n`
+        css = `${css};\n`
+
+        //各項目のステートをレデューサーへ送る準備を示す
+        const comp = { ...newState }
 
         //CSSの状態をレデューサーへ（あるいはアクションクリエイターへ）渡す
         const value = {
             obj,
-            css
+            css,
+            comp,
         }
         setStyleDispatch({ type: 'bg', value });
-
-        //各項目の状態をレデューサーへ（あるいはアクションクリエイターへ）渡す
-        const valueUnit = {
-            background: state
-        }
-        setStyleDispatch({ type: 'cu', value: valueUnit });
     }
 
-    useEffect(()=>{bgCSS()},[])
-
+    useEffect(() => { bgCSS() }, [])
+    
     return (
         <div>
             <p style={styleState.componentStyle.heading.a}>ボタンの背景色</p>
-            <div><input type="color" value={state.bgcolor} onChange={bgColorFunc} /></div>
-            <div>{state.bgcolor}</div>
+            <div><input type="color" value={styleState.newStyle.background.comp.bgcolor} onChange={bgColorFunc} /></div>
+            <div>{styleState.newStyle.background.comp.bgcolor}</div>
         </div>
     )
 }

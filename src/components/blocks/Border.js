@@ -80,7 +80,7 @@ export function Border() {
         for (let property in obj) {
             let direction = property.replace(/border/g, '').toLowerCase();
             direction === '' ? direction = 'border' : direction = `border-${direction}`;
-            css = css + direction + ': ' + obj[property] + '\n';
+            css = css + direction + ': ' + obj[property] + ';\n';
         }
         
         //ストアへ渡す形を作る

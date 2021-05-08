@@ -1,4 +1,4 @@
-import { useState, useCallback, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Sheet } from '../Integrate';
 
 //余白
@@ -31,12 +31,16 @@ export function Padding() {
         for (let property in obj) {
             css = css + obj[property];
         }
-        css = `${css}\n`
+        css = `${css};\n`
+
+        //各項目のステートをレデューサーへ送る準備を示す
+        const comp = { ...newState }
 
         //ストアへ渡す形を作る
         const value = {
             obj,
-            css
+            css,
+            comp,
         }
 
         setStyleDispatch({ type: 'pd', value })
@@ -47,8 +51,8 @@ export function Padding() {
     return (
         <div>
             <p style={styleState.componentStyle.heading.a}>余白</p>
-            <input type="range" value={state.size} min="0" max="100" onChange={sizeFunc} />
-            <div>{state.size}px</div>
+            <input type="range" value={styleState.newStyle.padding.comp.size} min="0" max="100" onChange={sizeFunc} />
+            <div>{styleState.newStyle.padding.comp.size}px</div>
         </div>
     )
 }

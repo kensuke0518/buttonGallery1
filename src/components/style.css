@@ -1,0 +1,14 @@
+.block{
+    display: flex;
+    flex-wrap: wrap;
+}
+.block > div{
+    width: 300px;
+    padding:10px
+}
+.block > div:nth-child(even){
+    background:rgb(166, 171, 248);
+}
+.block > div:nth-child(odd){
+    background:rgb(222, 245, 94);
+}

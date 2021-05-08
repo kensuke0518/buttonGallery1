@@ -1,4 +1,4 @@
-import { useState, useCallback, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Sheet } from '../Integrate';
 
 //角丸
@@ -119,18 +119,26 @@ export function BorderRadius() {
         for (let property in obj) {
             css = css + obj[property];
         }
-        css = `${css}\n`
+        css = `${css};\n`
+
+        //各項目のステートをレデューサーへ送る準備を示す
+        const comp = { ...newState }
 
         //ストアへ渡す形を作る
         const value = {
             obj,
-            css
+            css,
+            comp,
         }
 
         setStyleDispatch({ type: 'br', value })
     }
 
     useEffect(() => { brCSS() }, [])
+
+    const brValue = styleState.newStyle.borderRadius.comp;
+    let dispBrValue;
+    Object.keys(brValue).length === 0 ? dispBrValue = state : dispBrValue = brValue;
 
     return (
         <div>
@@ -141,7 +149,7 @@ export function BorderRadius() {
             <div>
                 <input type="checkbox" value="a" onChange={radiusUseFunc} defaultChecked />A<br />
                 <input type="range" name="a" onChange={sizeFunc} />
-                <div>{state.style.a.size}</div>
+                <div>{dispBrValue.style.a.size}</div>
                 <div>
                     <input type="radio" value="px" name="a" onChange={unitFunc} defaultChecked />px
                     <input type="radio" value="%" name="a" onChange={unitFunc} />%
@@ -151,7 +159,7 @@ export function BorderRadius() {
             <div>
                 <input type="checkbox" value="b" onChange={radiusUseFunc} />B<br />
                 <input type="range" name="b" onChange={sizeFunc} />
-                <div>{state.style.b.size}</div>
+                <div>{dispBrValue.style.b.size}</div>
                 <div>
                     <input type="radio" value="px" name="b" onChange={unitFunc} defaultChecked />px
                     <input type="radio" value="%" name="b" onChange={unitFunc} />%
@@ -161,7 +169,7 @@ export function BorderRadius() {
             <div>
                 <input type="checkbox" value="c" onChange={radiusUseFunc} />C<br />
                 <input type="range" name="c" onChange={sizeFunc} />
-                <div>{state.style.c.size}</div>
+                <div>{dispBrValue.style.c.size}</div>
                 <div>
                     <input type="radio" value="px" name="c" onChange={unitFunc} defaultChecked />px
                     <input type="radio" value="%" name="c" onChange={unitFunc} />%
@@ -171,7 +179,7 @@ export function BorderRadius() {
             <div>
                 <input type="checkbox" value="d" onChange={radiusUseFunc} />D<br />
                 <input type="range" name="d" onChange={sizeFunc} />
-                <div>{state.style.d.size}</div>
+                <div>{dispBrValue.style.d.size}</div>
                 <div>
                     <input type="radio" value="px" name="d" onChange={unitFunc} defaultChecked />px
                     <input type="radio" value="%" name="d" onChange={unitFunc} />%
@@ -181,6 +189,3 @@ export function BorderRadius() {
         </div>
     )
 }
-
-
-

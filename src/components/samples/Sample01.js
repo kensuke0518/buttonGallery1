@@ -7,7 +7,45 @@ export const Sample01 = () => {
     const sampleData = {
         background: {
             obj: { background: '#2c51db' },
-            css: 'background:#2c51db',
+            css: 'background:#2c51db;\n',
+            comp: { bgcolor: '#2c51db' }
+        },
+        padding: {
+            obj: { padding: '40px' },
+            css: 'padding:40px;\n',
+            comp: {
+                size: '40',
+                unit: 'px',
+            }
+        },
+        borderRadius: {
+            obj: {},
+            css: '',
+            comp: {
+                horizonVertical: false,
+                style: {
+                    a: {
+                        check: false,
+                        size: '0',
+                        unit: 'px',
+                    },
+                    b: {
+                        check: false,
+                        size: '0',
+                        unit: 'px',
+                    },
+                    c: {
+                        check: false,
+                        size: '0',
+                        unit: 'px',
+                    },
+                    d: {
+                        check: false,
+                        size: '0',
+                        unit: 'px',
+                    },
+                }
+            }
         },
         otherStyle: {
             obj: {

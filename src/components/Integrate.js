@@ -1,4 +1,4 @@
-import React,{ useState, useEffect, useReducer } from 'react';
+import React,{ useReducer } from 'react';
 import { Character } from './blocks/Character';
 import { Background } from './blocks/Background';
 import { Padding } from './blocks/Padding';
@@ -7,6 +7,7 @@ import { BorderRadius } from './blocks/BorderRadius';
 import { Preview } from './Preview';
 import { Cascade } from './Cascade';
 import { Sample } from './samples/Sample';
+import './style.css';
 
 export const Sheet = React.createContext()
 
@@ -18,30 +19,29 @@ const initialState = {
     newStyle: {
         background: {
             obj: {}, //Preview用
-            css: '' //Cascade用
+            css: '', //Cascade用
+            comp:{}, //コンポーネントの値 + Sample用
         },
         padding: {
             obj: {}, //Preview用
-            css: '' //Cascade用
+            css: '', //Cascade用
+            comp: {}, //コンポーネントの値 + Sample用
         },
         border: { //複数borderが指定されたオブジェクトが渡される。
             obj: {}, //Preview用
-            css: '' //Cascade用
+            css: '', //Cascade用
+            comp: {}, //コンポーネントの値 + Sample用
         },
         borderRadius: {
             obj: {}, //Preview用
-            css: '' //Cascade用
+            css: '', //Cascade用
+            comp: {}, //コンポーネントの値 + Sample用
         },
         otherStyle: {
             obj: {}, //Preview用
-            css: '' //Cascade用
+            css: '', //Cascade用
+            comp: {}, //コンポーネントの値 + Sample用
         }
-    },
-    componentUnit: {
-        background: {},
-        padding: {},
-        border: {},
-        borderRadius: {},
     },
     componentStyle: {
         heading: {
@@ -57,7 +57,8 @@ const initialState = {
 //レデューサー（CSSの取得のみにしたい）
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'br': {
+        case 'br': 
+            console.log(action.value)
             return {
                 ...state,
                 newStyle: {
@@ -65,7 +66,6 @@ const reducer = (state, action) => {
                     borderRadius: action.value
                 }
             }
-        }
         case 'bd': 
             return {
                 ...state,
@@ -95,8 +95,7 @@ const reducer = (state, action) => {
                 ...state,
                 character: action.value
             }
-        case 'cu': {
-            console.log(action.value)
+        case 'cu': 
             return {
                 ...state,
                 componentUnit: {
@@ -104,7 +103,6 @@ const reducer = (state, action) => {
                     ...action.value
                 }
             }
-        }
         case 'sample':
             return {
                 ...state,
@@ -113,6 +111,8 @@ const reducer = (state, action) => {
                     ...action.value
                 }
             }
+        defalut:
+            break;
     }
 }
 
@@ -124,11 +124,13 @@ export function Integrate() {
             <Sample />
             <Preview />
             <Cascade />
-            <Character />
-            <Background />
-            <Padding />
-            <Border />
-            <BorderRadius />
+            <div className="block">
+                <Character />
+                <Background />
+                <Padding />
+                <Border />
+                <BorderRadius />
+            </div>
         </Sheet.Provider>
     )
 }

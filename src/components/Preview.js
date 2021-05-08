@@ -1,9 +1,9 @@
-import { useState, useCallback, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { Sheet } from './Integrate';
 
 export function Preview() {
     //ストアと繋ぐ
-    const [styleState, setStyleState] = useContext(Sheet)
+    const [styleState] = useContext(Sheet)
 
     //背景色のステート
     const [bgColorState, setBgColorState] = useState('#edfee3')
@@ -42,7 +42,7 @@ export function Preview() {
     return (
         <div>
             <div style={style}>
-                <a href="" onClick={stopLink} className="preview" style={buttonStyle}>{styleState.character.character}</a>
+                <a href="#" onClick={stopLink} className="preview" style={buttonStyle}>{styleState.character.character}</a>
             </div>
             <input type="color" defaultValue={bgColorState} onChange={ bgColorFunc }/>
         </div>

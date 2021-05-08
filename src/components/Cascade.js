@@ -1,10 +1,10 @@
-import { useState, useCallback, useContext } from 'react';
+import { useContext } from 'react';
 import { Sheet } from './Integrate';
 
 
 //CSS抽出
 export function Cascade() {
-    const [styleState, setStyleState] = useContext(Sheet)
+    const [styleState] = useContext(Sheet)
 
     const newStyle = styleState.newStyle;
 
