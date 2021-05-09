@@ -57,8 +57,7 @@ const initialState = {
 //レデューサー（CSSの取得のみにしたい）
 const reducer = (state, action) => {
     switch (action.type) {
-        case 'br': 
-            console.log(action.value)
+        case 'br':
             return {
                 ...state,
                 newStyle: {

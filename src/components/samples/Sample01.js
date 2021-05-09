@@ -44,7 +44,8 @@ export const Sample01 = () => {
                         size: '0',
                         unit: 'px',
                     },
-                }
+                },
+                sampling:true
             }
         },
         otherStyle: {
