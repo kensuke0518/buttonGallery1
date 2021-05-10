@@ -1,19 +1,23 @@
 import { useState, useCallback, useContext, useEffect } from 'react';
 import { Sheet } from '../Integrate';
 
+//ストアで管理するステートの値
+export const bdState = {
+    check: ['left'],
+    size: '3',
+    color: '#ff0000',
+}
+
 //ボーダー
 export function Border() {
     const [styleState, setStyleDispatch] = useContext(Sheet);
 
-    const [state, setState] = useState({
-        check: ['left'],
-        size: '3',
-        color: '#ff0000',
-    })
+    //ストアのデータを変数に代入
+    const bdComp = styleState.newStyle.border.comp;
 
     //方向
     const directionFunc = e => {
-        const [...check] = state.check;
+        const [...check] = bdComp.check;
         const num = check.indexOf(e.target.value);
         if (num === -1) {
             check.push(e.target.value)
@@ -22,41 +26,32 @@ export function Border() {
             check.splice(num, 1)
         }
         const newState = {
-            ...state,
+            ...bdComp,
             check: check,
         }
-        setState({
-            ...newState,
-        })
         bdCSS(newState);
     }
 
     //サイズ
     const sizeFunc = e => {
         const newState = {
-            ...state,
+            ...bdComp,
             size: e.target.value,
         }
-        setState({
-            ...newState,
-        })
         bdCSS(newState);
    }
 
     //カラー
     const colorFunc = e => {
         const newState = {
-            ...state,
+            ...bdComp,
             color: e.target.value,
         }
-        setState({
-            ...newState,
-        })
         bdCSS(newState);
     }
 
     //CSS
-    function bdCSS(newState = state) {
+    function bdCSS(newState = bdComp) {
         //オブジェクトで示す。
         const obj = {}
         if (newState.check.length === 4) {
@@ -83,10 +78,14 @@ export function Border() {
             css = css + direction + ': ' + obj[property] + ';\n';
         }
         
+        //各項目のステートをレデューサーへ送る準備を示す
+        const comp = newState
+
         //ストアへ渡す形を作る
         const value = {
             obj,
-            css
+            css,
+            comp
         }
         
         setStyleDispatch({ type: 'bd', value });
@@ -103,10 +102,10 @@ export function Border() {
                 <input type="checkbox" name="" value="left" id="borderLeft" defaultChecked onClick={directionFunc} />左
                 <input type="checkbox" name="" value="right" id="borderRight" onClick={directionFunc} />右
             </div>
-            <input type="range" value={state.size} min="0" max="10" onChange={sizeFunc} />
-            <div>{state.size}px</div>
-            <input type="color" value={state.color} onChange={colorFunc} />
-            <div>{state.color}</div>
+            <input type="range" value={bdComp.size} min="0" max="10" onChange={sizeFunc} />
+            <div>{bdComp.size}px</div>
+            <input type="color" value={bdComp.color} onChange={colorFunc} />
+            <div>{bdComp.color}</div>
         </div>
     )
 }

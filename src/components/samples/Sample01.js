@@ -1,8 +1,101 @@
 import { useContext } from 'react';
+import {newStyle} from '../Integrate'
 import { Sheet } from '../Integrate';
+
+const defaultData = {
+    background: {
+        obj: {}, //Preview用
+        css: '', //Cascade用
+        comp: {}, //コンポーネントの値 + Sample用
+    },
+    padding: {
+        obj: {}, //Preview用
+        css: '', //Cascade用
+        comp: {}, //コンポーネントの値 + Sample用
+    },
+    border: { //複数borderが指定されたオブジェクトが渡される。
+        obj: {}, //Preview用
+        css: '', //Cascade用
+        comp: {}, //コンポーネントの値 + Sample用
+    },
+    borderRadius: {
+        obj: {}, //Preview用
+        css: '', //Cascade用
+        comp: {}, //コンポーネントの値 + Sample用
+    },
+    otherStyle: {
+        obj: {}, //Preview用
+        css: '', //Cascade用
+        comp: {}, //コンポーネントの値 + Sample用
+    }
+}
 
 export const Sample01 = () => {
     const [styleState, setStyleDispatch] = useContext(Sheet);
+
+    //サンプルデータのCSS in JS
+    const style = {
+        background: '#2c51db',
+        padding: '40px',
+        borderRadius:'20px 20px',
+        color: '#f00',
+        textShadow: '#FC0 1px 0 10px',
+    }
+
+    //変数styleをステートへ送信できる形にする
+    for (let prop in style) {
+        //変数
+        let object, cascade, component;
+        //関数
+        const simple = (object, cascade, component) => {
+            defaultData[prop].obj = object;
+            defaultData[prop].css = cascade
+            defaultData[prop].comp = component
+        }
+        //各プロパティのステートを抽出。
+        switch (prop) {
+            case 'background':
+                //オブジェクト
+                object = { [prop]: style[prop] }
+                //スタイルシート
+                cascade = `${prop}: ${style[prop]};\n`
+                //コンポーネントで使用する値
+                component = { bgcolor: style[prop] }
+                //追加
+                simple(object, cascade, component)
+                break;
+
+            case 'padding':
+                //オブジェクト
+                object = { [prop]: style[prop] }
+                //スタイルシート
+                cascade = `${prop}: ${style[prop]};\n`
+                //コンポーネントで使用する値
+                const size = style[prop].replace(/px/g, '');
+                const unit = style[prop].replace(/\d/g, '');
+                component = {
+                    size,
+                    unit
+                }
+                //追加
+                simple(object, cascade, component)
+                break;
+
+            case 'borderRadius':
+                //オブジェクト
+                object = { [prop]: style[prop] }
+                //スタイルシート
+                cascade = `${prop}: ${style[prop]};\n`
+                //コンポーネントで使用する値
+                //追加
+                simple(object, cascade, component)
+                break;
+
+            default:
+                break;
+        }
+    }
+    console.log(defaultData)
 
     const sampleData = {
         background: {
@@ -27,22 +120,38 @@ export const Sample01 = () => {
                     a: {
                         check: false,
                         size: '0',
-                        unit: 'px',
+                        unit: [
+                            { value: 'px', checked: true },
+                            { value: '%', checked: false },
+                            { value: 'rem', checked: false },
+                        ]
                     },
                     b: {
                         check: false,
                         size: '0',
-                        unit: 'px',
+                        unit: [
+                            { value: 'px', checked: true },
+                            { value: '%', checked: false },
+                            { value: 'rem', checked: false },
+                        ]
                     },
                     c: {
                         check: false,
                         size: '0',
-                        unit: 'px',
+                        unit: [
+                            { value: 'px', checked: true },
+                            { value: '%', checked: false },
+                            { value: 'rem', checked: false },
+                        ]
                     },
                     d: {
                         check: false,
                         size: '0',
-                        unit: 'px',
+                        unit: [
+                            { value: 'px', checked: true },
+                            { value: '%', checked: false },
+                            { value: 'rem', checked: false },
+                        ]
                     },
                 },
                 sampling:true
@@ -53,7 +162,7 @@ export const Sample01 = () => {
                 color: '#f00',
                 textShadow: '#FC0 1px 0 10px',
             },
-            color: 'color:#f00;\ntext-shadow:#FC0 1px 0 10px;\n'
+            css: 'color:#f00;\ntext-shadow:#FC0 1px 0 10px;\n'
         }
     }
 

@@ -1,9 +1,10 @@
 import React,{ useReducer } from 'react';
 import { Character } from './blocks/Character';
-import { Background } from './blocks/Background';
-import { Padding } from './blocks/Padding';
-import { Border } from './blocks/Border';
-import { BorderRadius } from './blocks/BorderRadius';
+import { Width, wdState } from './blocks/Width';
+import { Background, bgState } from './blocks/Background';
+import { Padding, pdState } from './blocks/Padding';
+import { Border, bdState } from './blocks/Border';
+import { BorderRadius, brState } from './blocks/BorderRadius';
 import { Preview } from './Preview';
 import { Cascade } from './Cascade';
 import { Sample } from './samples/Sample';
@@ -11,44 +12,52 @@ import './style.css';
 
 export const Sheet = React.createContext()
 
+//新しいスタイル:newStyle
+export const newStyle = {
+    width: {
+        obj: {}, //Preview用
+        css: '', //Cascade用
+        comp: wdState, //コンポーネントの値 + Sample用
+    },
+    background: {
+        obj: {}, //Preview用
+        css: '', //Cascade用
+        comp: bgState, //コンポーネントの値 + Sample用
+    },
+    padding: {
+        obj: {}, //Preview用
+        css: '', //Cascade用
+        comp: pdState, //コンポーネントの値 + Sample用
+    },
+    border: { //複数borderが指定されたオブジェクトが渡される。
+        obj: {}, //Preview用
+        css: '', //Cascade用
+        comp: bdState, //コンポーネントの値 + Sample用
+    },
+    borderRadius: {
+        obj: {}, //Preview用
+        css: '', //Cascade用
+        comp: brState, //コンポーネントの値 + Sample用
+    },
+    otherStyle: {
+        obj: {}, //Preview用
+        css: '', //Cascade用
+        comp: {}, //コンポーネントの値 + Sample用
+    }
+}
+
 //ステート
 //ステートには「プロパティ名:{プロパティ:値,...}というオブジェクトを渡して、Preview.jsで展開する。
 //作業開始前にまず何より「ステートの設計」を重視してやった方がいい。あとで全てのコンポーネントに支障が出る。
 const initialState = {
     character: { character: '送信' },
-    newStyle: {
-        background: {
-            obj: {}, //Preview用
-            css: '', //Cascade用
-            comp:{}, //コンポーネントの値 + Sample用
-        },
-        padding: {
-            obj: {}, //Preview用
-            css: '', //Cascade用
-            comp: {}, //コンポーネントの値 + Sample用
-        },
-        border: { //複数borderが指定されたオブジェクトが渡される。
-            obj: {}, //Preview用
-            css: '', //Cascade用
-            comp: {}, //コンポーネントの値 + Sample用
-        },
-        borderRadius: {
-            obj: {}, //Preview用
-            css: '', //Cascade用
-            comp: {}, //コンポーネントの値 + Sample用
-        },
-        otherStyle: {
-            obj: {}, //Preview用
-            css: '', //Cascade用
-            comp: {}, //コンポーネントの値 + Sample用
-        }
-    },
+    newStyle,
     componentStyle: {
         heading: {
             a: {
-                    borderLeft: '4px solid #58d510',
-                    background: '#fff',
-                    paddingLeft: '.5em'
+                borderLeft: '4px solid #58d510',
+                background: '#fff',
+                paddingLeft: '.5em'
             }
         }
     }
@@ -71,6 +80,18 @@ const reducer = (state, action) => {
                 newStyle: {
                     ...state.newStyle,
                     border:action.value
+                }
+            }
+        case 'bdChecked':
+            return {
+
+            }
+        case 'wd':
+            return {
+                ...state,
+                newStyle: {
+                    ...state.newStyle,
+                    width: action.value
                 }
             }
         case 'pd':
@@ -125,6 +146,7 @@ export function Integrate() {
             <Cascade />
             <div className="block">
                 <Character />
+                <Width />
                 <Background />
                 <Padding />
                 <Border />

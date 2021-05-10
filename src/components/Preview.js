@@ -16,14 +16,16 @@ export function Preview() {
         alignItems: 'center',
         justifyContent: 'center',
         border: '1px solid #ddd',
-        background: bgColorState
+        background: bgColorState,
     }
 
     //ボタンのスタイルをストアから取得
     const newStyle = styleState.newStyle
     const buttonStyle = {
         display: 'inline-block',
+        textAlign: 'center',
         textDecoration: 'none',
+        ...newStyle.width.obj,
         ...newStyle.border.obj,
         ...newStyle.borderRadius.obj,
         ...newStyle.padding.obj,

@@ -1,26 +1,27 @@
 import { useState, useCallback, useContext, useEffect } from 'react';
 import { Sheet } from '../Integrate';
 
+//ストアで管理するステートの値
+export const bgState = {
+    bgcolor: '#189bdc',
+}
+
 //背景色
 export function Background() {
     const [styleState, setStyleDispatch] = useContext(Sheet);
 
-    const [state, setState] = useState({
-        bgcolor: '#189bdc',
-    })
+    //ストアを変数に代入
+    const bgComp = styleState.newStyle.background.comp;
 
     const bgColorFunc = e => {
         const newState = {
-            ...state,
+            ...bgComp,
             bgcolor: e.target.value,
         }
-        setState({ //setStateが遅い。。。
-            ...newState,
-        })
         bgCSS(newState);
     }
 
-    const bgCSS = (newState = state) => {
+    const bgCSS = (newState = bgComp) => {
         //オブジェクトで示す
         const obj = {}
         obj['background'] = newState.bgcolor
@@ -49,8 +50,8 @@ export function Background() {
     return (
         <div>
             <p style={styleState.componentStyle.heading.a}>ボタンの背景色</p>
-            <div><input type="color" value={styleState.newStyle.background.comp.bgcolor} onChange={bgColorFunc} /></div>
-            <div>{styleState.newStyle.background.comp.bgcolor}</div>
+            <div><input type="color" value={bgComp.bgcolor} onChange={bgColorFunc} /></div>
+            <div>{bgComp.bgcolor}</div>
         </div>
     )
 }
