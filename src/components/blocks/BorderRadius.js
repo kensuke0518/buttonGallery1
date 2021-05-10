@@ -6,7 +6,7 @@ export const brState = {
     horizonVertical: false,
     style: {
         a: {
-            check: true,
+            checked: true,
             size: '10',
             unit: [
                 { value: 'px', checked: true },
@@ -15,7 +15,7 @@ export const brState = {
             ],
         },
         b: {
-            check: false,
+            checked: true,
             size: '10',
             unit: [
                 { value: 'px', checked: true },
@@ -24,7 +24,7 @@ export const brState = {
             ],
         },
         c: {
-            check: false,
+            checked: false,
             size: '10',
             unit: [
                 { value: 'px', checked: true },
@@ -33,7 +33,7 @@ export const brState = {
             ],
         },
         d: {
-            check: false,
+            checked: false,
             size: '10',
             unit: [
                 { value: 'px', checked: true },
@@ -72,7 +72,7 @@ export function BorderRadius() {
                 ...brComp.style,
                 [targetName]: {
                     ...brComp.style[targetName],
-                    check: e.target.checked
+                    checked: e.target.checked
                 }
             },
             sampling: false
@@ -129,14 +129,12 @@ export function BorderRadius() {
 
     //最終的なCSSの抽出
     const brCSS = (newState = brComp) => {
-        const obj = {}
         const stateStyles = newState.style;
         let brValue = '';
         let array = []
         let size, unit;
-        console.log(stateStyles)
         for (let p in stateStyles) {
-            if (stateStyles[p].check === false) {
+            if (stateStyles[p].checked === false) {
                 array.push(0)
                 continue;
             }
@@ -144,7 +142,7 @@ export function BorderRadius() {
                 if (stateStyles[p].unit[i].checked === true) {
                     size = stateStyles[p].size
                     unit = stateStyles[p].unit[i].value;
-                    array.push(`${stateStyles[p].size}${unit}`)
+                    size === '0' ? array.push(`${stateStyles[p].size}`) : array.push(`${stateStyles[p].size}${unit}`);
                 }
             }
         }
@@ -161,24 +159,35 @@ export function BorderRadius() {
             }
         }
 
-
+        //オブジェクトで示す
+        let obj = {}
         obj['borderRadius'] = brValue;
 
         //CSSで示す
-        let css;
-        if (obj['borderRadius'] !== '') {
-            css = 'border-radius:'
-            for (let property in obj) {
-                css = css + obj[property];
-            }
-            css = `${css};\n`
+        let css = 'border-radius:'
+        for (let property in obj) {
+            css = css + obj[property];
         }
-        else {
-            css = '';
-        }
+        css = `${css};\n`
 
         //各項目のステートをレデューサーへ送る準備を示す
         const comp = newState
+
+        //チェックが全てfalseの場合、CSSに反映させず、何も表示させないようにする
+        let checkedBoolean;
+        for (let p in stateStyles) {
+            if (stateStyles[p].checked === true) {
+                checkedBoolean = 1;
+                break;
+            }
+            else if (stateStyles[p].checked === false) {
+                checkedBoolean = 0;
+            }
+        }
+        if (checkedBoolean === 0) {
+            obj = {}
+            css = ''
+        }
 
         //ストアへ渡す形を作る
         const value = {
@@ -201,7 +210,7 @@ export function BorderRadius() {
                 <input type="checkbox" onClick={horizonVerticalFunc} />「水平半径/垂直半径」を使用する。
             </div>
             <div>
-                <input type="checkbox" value="a" onChange={radiusUseFunc} checked={brComp.style.a.check} />A<br />
+                <input type="checkbox" value="a" onChange={radiusUseFunc} checked={brComp.style.a.checked} />A<br />
                 <input type="range" name="a" value={brComp.style.a.size} onChange={sizeFunc} />
                 <div>{brComp.style.a.size}</div>
                 <div>
@@ -211,7 +220,7 @@ export function BorderRadius() {
                 </div>
             </div>
             <div>
-                <input type="checkbox" value="b" onChange={radiusUseFunc} checked={brComp.style.b.check} />B<br />
+                <input type="checkbox" value="b" onChange={radiusUseFunc} checked={brComp.style.b.checked} />B<br />
                 <input type="range" name="b" value={brComp.style.b.size} onChange={sizeFunc} />
                 <div>{brComp.style.b.size}</div>
                 <div>
@@ -221,7 +230,7 @@ export function BorderRadius() {
                 </div>
             </div>
             <div>
-                <input type="checkbox" value="c" onChange={radiusUseFunc} checked={brComp.style.c.check} />C<br />
+                <input type="checkbox" value="c" onChange={radiusUseFunc} checked={brComp.style.c.checked} />C<br />
                 <input type="range" name="c" value={brComp.style.c.size} onChange={sizeFunc} />
                 <div>{brComp.style.c.size}</div>
                 <div>
@@ -231,7 +240,7 @@ export function BorderRadius() {
                 </div>
             </div>
             <div>
-                <input type="checkbox" value="d" onChange={radiusUseFunc} checked={brComp.style.d.check} />D<br />
+                <input type="checkbox" value="d" onChange={radiusUseFunc} checked={brComp.style.d.checked} />D<br />
                 <input type="range" name="d" value={brComp.style.d.size} onChange={sizeFunc} />
                 <div>{brComp.style.d.size}</div>
                 <div>

@@ -12,39 +12,46 @@ import './style.css';
 
 export const Sheet = React.createContext()
 
-//新しいスタイル:newStyle
-export const newStyle = {
-    width: {
-        obj: {}, //Preview用
-        css: '', //Cascade用
-        comp: wdState, //コンポーネントの値 + Sample用
-    },
-    background: {
-        obj: {}, //Preview用
-        css: '', //Cascade用
-        comp: bgState, //コンポーネントの値 + Sample用
-    },
-    padding: {
-        obj: {}, //Preview用
-        css: '', //Cascade用
-        comp: pdState, //コンポーネントの値 + Sample用
-    },
-    border: { //複数borderが指定されたオブジェクトが渡される。
-        obj: {}, //Preview用
-        css: '', //Cascade用
-        comp: bdState, //コンポーネントの値 + Sample用
-    },
-    borderRadius: {
-        obj: {}, //Preview用
-        css: '', //Cascade用
-        comp: brState, //コンポーネントの値 + Sample用
-    },
-    otherStyle: {
-        obj: {}, //Preview用
-        css: '', //Cascade用
-        comp: {}, //コンポーネントの値 + Sample用
-    }
+//下記関数はexport const にするとSampleで呼び出す際にエラーになる。理由を調べておく
+export function init(wdState, bgState, pdState, bdState, brState){
+    return (
+        {
+            width: {
+                obj: {}, //Preview用
+                css: '', //Cascade用
+                comp: wdState, //コンポーネントの値 + Sample用
+            },
+            background: {
+                obj: {}, //Preview用
+                css: '', //Cascade用
+                comp: bgState, //コンポーネントの値 + Sample用
+            },
+            padding: {
+                obj: {}, //Preview用
+                css: '', //Cascade用
+                comp: pdState, //コンポーネントの値 + Sample用
+            },
+            border: { //複数borderが指定されたオブジェクトが渡される。
+                obj: {}, //Preview用
+                css: '', //Cascade用
+                comp: bdState, //コンポーネントの値 + Sample用
+            },
+            borderRadius: {
+                obj: {}, //Preview用
+                css: '', //Cascade用
+                comp: brState, //コンポーネントの値 + Sample用
+            },
+            otherStyle: {
+                obj: {}, //Preview用
+                css: '', //Cascade用
+                comp: {}, //コンポーネントの値 + Sample用
+            }
+        }
+    );
 }
+
+//新しいスタイル:newStyle
+export const newStyle = init(wdState, bgState, pdState, bdState, brState);
 
 //ステート
 //ステートには「プロパティ名:{プロパティ:値,...}というオブジェクトを渡して、Preview.jsで展開する。

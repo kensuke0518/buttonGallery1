@@ -1,34 +1,10 @@
 import { useContext } from 'react';
-import {newStyle} from '../Integrate'
+import { init } from '../Integrate';
 import { Sheet } from '../Integrate';
 
-const defaultData = {
-    background: {
-        obj: {}, //Preview用
-        css: '', //Cascade用
-        comp: {}, //コンポーネントの値 + Sample用
-    },
-    padding: {
-        obj: {}, //Preview用
-        css: '', //Cascade用
-        comp: {}, //コンポーネントの値 + Sample用
-    },
-    border: { //複数borderが指定されたオブジェクトが渡される。
-        obj: {}, //Preview用
-        css: '', //Cascade用
-        comp: {}, //コンポーネントの値 + Sample用
-    },
-    borderRadius: {
-        obj: {}, //Preview用
-        css: '', //Cascade用
-        comp: {}, //コンポーネントの値 + Sample用
-    },
-    otherStyle: {
-        obj: {}, //Preview用
-        css: '', //Cascade用
-        comp: {}, //コンポーネントの値 + Sample用
-    }
-}
+const defaultData = init()
+console.log(defaultData)
+
 
 export const Sample01 = () => {
     const [styleState, setStyleDispatch] = useContext(Sheet);
@@ -95,7 +71,6 @@ export const Sample01 = () => {
                 break;
         }
     }
-    console.log(defaultData)
 
     const sampleData = {
         background: {
