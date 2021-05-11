@@ -1,6 +1,7 @@
 import React,{ useReducer } from 'react';
 import { Character } from './blocks/Character';
 import { Width, wdState } from './blocks/Width';
+import { Color, crState } from './blocks/Color';
 import { Background, bgState } from './blocks/Background';
 import { Padding, pdState } from './blocks/Padding';
 import { Border, bdState } from './blocks/Border';
@@ -13,13 +14,18 @@ import './style.css';
 export const Sheet = React.createContext()
 
 //下記関数はexport const にするとSampleで呼び出す際にエラーになる。理由を調べておく
-export function init(wdState, bgState, pdState, bdState, brState){
+export function init(wdState, crState, bgState, pdState, bdState, brState){
     return (
         {
             width: {
                 obj: {}, //Preview用
                 css: '', //Cascade用
                 comp: wdState, //コンポーネントの値 + Sample用
+            },
+            color: {
+                obj: {}, //Preview用
+                css: '', //Cascade用
+                comp: crState, //コンポーネントの値 + Sample用
             },
             background: {
                 obj: {}, //Preview用
@@ -51,7 +57,7 @@ export function init(wdState, bgState, pdState, bdState, brState){
 }
 
 //新しいスタイル:newStyle
-export const newStyle = init(wdState, bgState, pdState, bdState, brState);
+export const newStyle = init(wdState, crState, bgState, pdState, bdState, brState);
 
 //ステート
 //ステートには「プロパティ名:{プロパティ:値,...}というオブジェクトを渡して、Preview.jsで展開する。
@@ -117,6 +123,14 @@ const reducer = (state, action) => {
                     background: action.value
                 }
             }
+        case 'cr':
+            return {
+                ...state,
+                newStyle: {
+                    ...state.newStyle,
+                    color: action.value
+                }
+            }
         case 'ch':
             return {
                 ...state,
@@ -154,6 +168,7 @@ export function Integrate() {
             <div className="block">
                 <Character />
                 <Width />
+                <Color />
                 <Background />
                 <Padding />
                 <Border />

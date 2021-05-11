@@ -26,6 +26,7 @@ export function Preview() {
         textAlign: 'center',
         textDecoration: 'none',
         ...newStyle.width.obj,
+        ...newStyle.color.obj,
         ...newStyle.border.obj,
         ...newStyle.borderRadius.obj,
         ...newStyle.padding.obj,
