@@ -1,5 +1,5 @@
 import React,{ useReducer } from 'react';
-import { Character } from './blocks/Character';
+import { Character, chState } from './blocks/Character';
 import { Width, wdState } from './blocks/Width';
 import { Color, crState } from './blocks/Color';
 import { Background, bgState } from './blocks/Background';
@@ -63,7 +63,7 @@ export const newStyle = init(wdState, crState, bgState, pdState, bdState, brStat
 //ステートには「プロパティ名:{プロパティ:値,...}というオブジェクトを渡して、Preview.jsで展開する。
 //作業開始前にまず何より「ステートの設計」を重視してやった方がいい。あとで全てのコンポーネントに支障が出る。
 const initialState = {
-    character: { character: '送信' },
+    character: chState,
     newStyle,
     componentStyle: {
         heading: {
@@ -94,10 +94,6 @@ const reducer = (state, action) => {
                     ...state.newStyle,
                     border:action.value
                 }
-            }
-        case 'bdChecked':
-            return {
-
             }
         case 'wd':
             return {
@@ -145,6 +141,7 @@ const reducer = (state, action) => {
                 }
             }
         case 'sample':
+            console.log(action.value)
             return {
                 ...state,
                 newStyle: {

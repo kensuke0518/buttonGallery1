@@ -47,8 +47,6 @@ export function Color() {
 
     useEffect(() => { crCSS() }, [])
 
-    console.log(crComp.color)
-
     return (
         <div>
             <p style={styleState.componentStyle.heading.a}>文字色</p>

@@ -92,6 +92,8 @@ export function Border() {
     }
 
     useEffect(() => { bdCSS() }, [])
+
+    console.log(bdComp)
     
     return (
         <div>
