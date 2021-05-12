@@ -12,21 +12,26 @@ export const Sample01 = () => {
         width: '200px',
         background: '#2c51db',
         padding: '40px 30px',
-        borderRadius:'20px 20px 0 0',
-        border: '1px solid #000000',
+        borderRadius:'20px 20px 20px 20px',
+        borderLeft: '1px solid #Df00fE',
+        borderRight: '1px solid #Df00fE',
         color: '#f00',
-        textShadow: '#FC0 1px 0 10px',
+        boxShadow: '#FC0 10px 10px 10px',
+        display: 'block',
     }
 
+    let otherCSS = []
+    let borderCSS = '';
+    const borderCheck = [];
     //変数styleをステートへ送信できる形にする
     for (let prop in style) {
         //変数
         let object, cascade, component;
         //関数
-        const simple = (object, cascade, component) => {
-            defaultData[prop].obj = object;
-            defaultData[prop].css = cascade
-            defaultData[prop].comp = component
+        const simple = (prop, object, cascade, component) => {
+            defaultData[prop]['obj'] = object;
+            defaultData[prop]['css'] = cascade
+            defaultData[prop]['comp'] = component
         }
         //各プロパティのステートを抽出。
         switch (prop) {
@@ -36,29 +41,78 @@ export const Sample01 = () => {
                 //スタイルシート
                 cascade = `${prop}: ${style[prop]};\n`
                 //コンポーネントで使用する値
-                component = { width: style[prop] }
-                //追加
-                simple(object, cascade, component)
-                break;
-            }
-
-            case 'border' || 'border-top' || 'border-bottom' || 'border-left' || 'border-right': {
-                //オブジェクト
-                if (prop === 'border') {
-                    object = { [prop]: style[prop] }
+                let size = style[prop].replace(/(\d+).*/g, '$1')
+                let unit = style[prop].replace(/\d+(.*)/g, '$1')
+                component = {
+                    size,
+                    unit
                 }
-                //スタイルシート
-                cascade = `${prop}: ${style[prop]};\n`
-                //コンポーネントで使用する値
-                component = {},
-                component['size'],
-                component['color'],
-                component['size'],
-
                 //追加
-                simple(object, cascade, component)
+                simple(prop, object, cascade, component)
                 break;
             }
+
+            case 'border':
+            case 'borderTop':
+            case 'borderBottom':
+            case 'borderLeft':
+            case 'borderRight':{
+                if (prop === 'border') {
+                    //オブジェクト
+                    object = { [prop]: style[prop] }
+                    //スタイルシート
+                    cascade = `${prop}: ${style[prop]};\n`
+                    //コンポーネントで使用する値
+                    const check = ['top', 'bottom', 'left', 'right'];
+                    const size = style[prop].replace(/.*?(\d+?).*/g, '$1');
+                    const color = style[prop].replace(/^.*(#[0-9a-zA-Z]*)/g, '$1');
+                    component = {
+                        ...component,
+                        check,
+                        size,
+                        color
+                    };
+                    simple(object, cascade, component)
+                }
+                else {
+                    //オブジェクト
+                    object = {
+                        ...object,
+                        [prop]: style[prop]
+                    }
+                    //スタイルシート
+                    let propLower = prop.replace(/([A-Z])/g, '-$1').toLowerCase();
+                    borderCSS = `${propLower}: ${style[prop]};\n`
+                    console.log(borderCSS)
+                    //コンポーネントで使用する値
+                    const dir = prop.replace(/border(.+)/g, '$1').toLowerCase();
+                    borderCheck.push(dir);
+                    const size = style[prop].replace(/.*?(\d+?).*/g, '$1');
+                    const color = style[prop].replace(/.*?(#[0-9a-zA-Z]+).*/g, '$1');
+                    component = {
+                        ...component,
+                        check: borderCheck,
+                        size,
+                        color
+                    };
+                    //追加
+                    
+                    defaultData['border'] = {
+                        ...defaultData.border,
+                        obj: {
+                            ...defaultData.border.obj,
+                            ...object
+                        },
+                        css: borderCSS,
+                        comp: {
+                            ...defaultData.border.comp,
+                            ...component
+                        },
+                    };
+                    console.log(defaultData)
+                }
+            }
+            break;
 
             case 'background': {
                 //オブジェクト
@@ -66,9 +120,15 @@ export const Sample01 = () => {
                 //スタイルシート
                 cascade = `${prop}: ${style[prop]};\n`
                 //コンポーネントで使用する値
-                component = { bgcolor: style[prop] }
+                if (style[prop].length < 6) {
+                    const bgcolor = style[prop].replace(/#([0-9a-zA-Z])([0-9a-zA-Z])([0-9a-zA-Z])/g, '#$1$1$2$2$3$3')
+                    component = { bgcolor }
+                }
+                else {
+                    component = { bgcolor: style[prop] }
+                }
                 //追加
-                simple(object, cascade, component)
+                simple(prop, object, cascade, component)
                 break;
             }
 
@@ -78,9 +138,15 @@ export const Sample01 = () => {
                 //スタイルシート
                 cascade = `${prop}: ${style[prop]};\n`
                 //コンポーネントで使用する値
-                component = { color: style[prop] }
+                if (style[prop].length < 6) {
+                    const color = style[prop].replace(/#([0-9a-zA-Z])([0-9a-zA-Z])([0-9a-zA-Z])/g, '#$1$1$2$2$3$3')
+                    component = { color }
+                }
+                else {
+                    component = { bgcolor: style[prop] }
+                }
                 //追加
-                simple(object, cascade, component)
+                simple(prop, object, cascade, component)
                 break;
             }
 
@@ -149,16 +215,15 @@ export const Sample01 = () => {
                 }
                 component['sampling'] = true;
 
-                console.log(component)
                 //追加
-                simple(object, cascade, component)
+                simple(prop, object, cascade, component)
                 break;
             }
 
             case 'borderRadius': {
                 object = { [prop]: style[prop] }
                 //スタイルシート
-                let propLower = prop.replace(/(\u)/g, '-$1').toLowerCase();
+                let propLower = prop.replace(/([A-Z])/g, '-$1').toLowerCase();
                 cascade = `${propLower}: ${style[prop]};\n`
                 //コンポーネントで使用する値
                 component = {};
@@ -205,7 +270,7 @@ export const Sample01 = () => {
                 component['sampling'] = true;
                 component['horizonVertical'] = false;
                 //追加
-                simple(object, cascade, component)
+                simple(prop, object, cascade, component)
                 break;
             }
 
@@ -213,21 +278,27 @@ export const Sample01 = () => {
                 //オブジェクトで示す
                 defaultData['otherStyle'].obj = {
                     ...defaultData['otherStyle'].obj,
-                    prop: style[prop]
+                    [prop]: style[prop]
                 };
                 //スタイルで示す
-                let propLower = prop.replace(/(\u)/g, '-$1').toLowerCase();
-                defaultData['otherStyle'].css = `${defaultData['otherStyle'].css}`+`${propLower}:${style[prop]};\n`;
+                let propLower;
+                if (/[A-Z]/g.test(prop)) {
+                    propLower = prop.replace(/([A-Z])/g, '-$1').toLowerCase();
+                }
+                else {
+                    propLower = prop
+                }
+                otherCSS.push(`${propLower}:${style[prop]};\n`);
+                defaultData['otherStyle'].css = otherCSS.join('');
                 //各項目
                 defaultData['otherStyle'].comp = {
                     ...defaultData['otherStyle'].comp,
-                    prop: style[prop]
+                    [prop]: style[prop]
                 }
                 break;
             }
         }
     }
-    console.log(defaultData)
 
     const selectSampleFunc = () => {
         setStyleDispatch({ type: 'sample', value: defaultData });
