@@ -3,9 +3,12 @@ import { Sheet } from '../Integrate';
 
 //ストアで管理するステートの値
 export const bdState = {
-    check: ['left'],
-    size: '3',
-    color: '#ff0000',
+    property: 'border',
+    value: {
+        check: ['left'],
+        size: '3',
+        color: '#ff0000',
+    }
 }
 
 //ボーダー

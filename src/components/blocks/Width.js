@@ -3,8 +3,11 @@ import { Sheet } from '../Integrate';
 
 //ストアで管理するステートの値
 export const wdState = {
-    size: '300',
-    unit: 'px',
+    property: 'width',
+    value: {
+        size: '300',
+        unit: 'px',
+    }
 }
 
 //余白

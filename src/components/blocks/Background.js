@@ -3,7 +3,10 @@ import { Sheet } from '../Integrate';
 
 //ストアで管理するステートの値
 export const bgState = {
-    bgcolor: '#189bdc',
+    property: 'background',
+    value: {
+        bgcolor: '#189bdc',
+    }
 }
 
 //背景色

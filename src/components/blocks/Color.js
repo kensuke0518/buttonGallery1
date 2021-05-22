@@ -3,7 +3,10 @@ import { Sheet } from '../Integrate';
 
 //ストアで管理するステートの値
 export const crState = {
-    color:'#ffffff'
+    property: 'color',
+    value: {
+        color:'#ffffff'
+    }
 }
 
 //余白

@@ -21,19 +21,18 @@ export function Preview() {
 
     //ボタンのスタイルをストアから取得
     const newStyle = styleState.newStyle
-    const buttonStyle = {
+    let buttonStyle = {
         display: 'inline-block',
         textAlign: 'center',
         textDecoration: 'none',
-        ...newStyle.width.obj,
-        ...newStyle.color.obj,
-        ...newStyle.border.obj,
-        ...newStyle.borderRadius.obj,
-        ...newStyle.padding.obj,
-        ...newStyle.background.obj,
-        ...newStyle.otherStyle.obj,
     }
-    
+    for (let p in newStyle) {
+        buttonStyle = {
+            ...buttonStyle,
+            ...newStyle[p].obj
+        }
+    }
+
     //背景色設定
     const bgColorFunc = e => {
         setBgColorState(e.target.value)

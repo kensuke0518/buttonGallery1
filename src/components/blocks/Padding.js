@@ -3,45 +3,48 @@ import { Sheet } from '../Integrate';
 
 //ストアで管理するステートの値
 export const pdState = {
-    style: {
-        top: {
-            checked: true,
-            size: '10',
-            unit: [
-                { value: 'px', checked: true },
-                { value: '%', checked: false },
-                { value: 'rem', checked: false },
-            ],
+    property: 'padding',
+    value: {
+        style: {
+            top: {
+                checked: true,
+                size: '10',
+                unit: [
+                    { value: 'px', checked: true },
+                    { value: '%', checked: false },
+                    { value: 'rem', checked: false },
+                ],
+            },
+            right: {
+                checked: true,
+                size: '10',
+                unit: [
+                    { value: 'px', checked: true },
+                    { value: '%', checked: false },
+                    { value: 'rem', checked: false },
+                ],
+            },
+            bottom: {
+                checked: true,
+                size: '10',
+                unit: [
+                    { value: 'px', checked: true },
+                    { value: '%', checked: false },
+                    { value: 'rem', checked: false },
+                ],
+            },
+            left: {
+                checked: true,
+                size: '10',
+                unit: [
+                    { value: 'px', checked: true },
+                    { value: '%', checked: false },
+                    { value: 'rem', checked: false },
+                ],
+            },
         },
-        right: {
-            checked: true,
-            size: '10',
-            unit: [
-                { value: 'px', checked: true },
-                { value: '%', checked: false },
-                { value: 'rem', checked: false },
-            ],
-        },
-        bottom: {
-            checked: true,
-            size: '10',
-            unit: [
-                { value: 'px', checked: true },
-                { value: '%', checked: false },
-                { value: 'rem', checked: false },
-            ],
-        },
-        left: {
-            checked: true,
-            size: '10',
-            unit: [
-                { value: 'px', checked: true },
-                { value: '%', checked: false },
-                { value: 'rem', checked: false },
-            ],
-        },
-    },
-    sampling:false,
+        sampling: false,
+    }
 }
 
 //余白

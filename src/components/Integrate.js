@@ -14,50 +14,25 @@ import './style.css';
 export const Sheet = React.createContext()
 
 //下記関数はexport const にするとSampleで呼び出す際にエラーになる。理由を調べておく
-export function init(wdState, crState, bgState, pdState, bdState, brState){
-    return (
-        {
-            width: {
-                obj: {}, //Preview用
-                css: '', //Cascade用
-                comp: wdState, //コンポーネントの値 + Sample用
-            },
-            color: {
-                obj: {}, //Preview用
-                css: '', //Cascade用
-                comp: crState, //コンポーネントの値 + Sample用
-            },
-            background: {
-                obj: {}, //Preview用
-                css: '', //Cascade用
-                comp: bgState, //コンポーネントの値 + Sample用
-            },
-            padding: {
-                obj: {}, //Preview用
-                css: '', //Cascade用
-                comp: pdState, //コンポーネントの値 + Sample用
-            },
-            border: { //複数borderが指定されたオブジェクトが渡される。
-                obj: {}, //Preview用
-                css: '', //Cascade用
-                comp: bdState, //コンポーネントの値 + Sample用
-            },
-            borderRadius: {
-                obj: {}, //Preview用
-                css: '', //Cascade用
-                comp: brState, //コンポーネントの値 + Sample用
-            },
-            otherStyle: {
-                obj: {}, //Preview用
-                css: '', //Cascade用
-                comp: {}, //コンポーネントの値 + Sample用
-            }
+export function init() {
+    const states = [wdState, crState, bgState, pdState, bdState, brState];
+    const stateObj = {};
+    states.map(data => {
+        stateObj[data.property] = {
+            obj: {}, //Preview用
+            css: '', //Cascade用
+            comp: data.value, //コンポーネントの値 + Sample用
         }
-    );
+    })
+    stateObj['otherStyle'] = {
+            obj: { },
+            css: '',
+            comp: { },
+    }
+    return stateObj;
 }
-
 //新しいスタイル:newStyle
-export const newStyle = init(wdState, crState, bgState, pdState, bdState, brState);
+export const newStyle = init();
 
 //ステート
 //ステートには「プロパティ名:{プロパティ:値,...}というオブジェクトを渡して、Preview.jsで展開する。

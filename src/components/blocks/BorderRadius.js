@@ -3,46 +3,49 @@ import { Sheet } from '../Integrate';
 
 //ストアで管理するステートの値
 export const brState = {
-    horizonVertical: false,
-    style: {
-        a: {
-            checked: true,
-            size: '10',
-            unit: [
-                { value: 'px', checked: true },
-                { value: '%', checked: false },
-                { value: 'rem', checked: false },
-            ],
+    property: 'borderRadius',
+    value: {
+        horizonVertical: false,
+        style: {
+            a: {
+                checked: true,
+                size: '10',
+                unit: [
+                    { value: 'px', checked: true },
+                    { value: '%', checked: false },
+                    { value: 'rem', checked: false },
+                ],
+            },
+            b: {
+                checked: true,
+                size: '10',
+                unit: [
+                    { value: 'px', checked: true },
+                    { value: '%', checked: false },
+                    { value: 'rem', checked: false },
+                ],
+            },
+            c: {
+                checked: false,
+                size: '10',
+                unit: [
+                    { value: 'px', checked: true },
+                    { value: '%', checked: false },
+                    { value: 'rem', checked: false },
+                ],
+            },
+            d: {
+                checked: false,
+                size: '10',
+                unit: [
+                    { value: 'px', checked: true },
+                    { value: '%', checked: false },
+                    { value: 'rem', checked: false },
+                ],
+            },
         },
-        b: {
-            checked: true,
-            size: '10',
-            unit: [
-                { value: 'px', checked: true },
-                { value: '%', checked: false },
-                { value: 'rem', checked: false },
-            ],
-        },
-        c: {
-            checked: false,
-            size: '10',
-            unit: [
-                { value: 'px', checked: true },
-                { value: '%', checked: false },
-                { value: 'rem', checked: false },
-            ],
-        },
-        d: {
-            checked: false,
-            size: '10',
-            unit: [
-                { value: 'px', checked: true },
-                { value: '%', checked: false },
-                { value: 'rem', checked: false },
-            ],
-        },
-    },
-    sampling: false
+        sampling: false
+    }
 }
 
 //角丸
