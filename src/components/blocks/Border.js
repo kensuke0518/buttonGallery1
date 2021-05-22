@@ -97,10 +97,10 @@ export function Border() {
         <div>
             <p style={styleState.componentStyle.heading.a}>ボーダー</p>
             <div>
-                <input type="checkbox" name="" value="top" id="borderTop" onClick={directionFunc} />上
-                <input type="checkbox" name="" value="bottom" id="borderBottom" onClick={directionFunc} />下
-                <input type="checkbox" name="" value="left" id="borderLeft" defaultChecked onClick={directionFunc} />左
-                <input type="checkbox" name="" value="right" id="borderRight" onClick={directionFunc} />右
+                <input type="checkbox" name="" value="top" id="borderTop" checked={bdComp.check.includes('top') ? true : false} onClick={directionFunc} />上
+                <input type="checkbox" name="" value="bottom" id="borderBottom" checked={bdComp.check.includes('bottom') ? true : false} onClick={directionFunc} />下
+                <input type="checkbox" name="" value="left" id="borderLeft" checked={bdComp.check.includes('left') ? true : false} onClick={directionFunc} />左
+                <input type="checkbox" name="" value="right" id="borderRight" checked={bdComp.check.includes('right') ? true : false} onClick={directionFunc} />右
             </div>
             <input type="range" value={bdComp.size} min="0" max="10" onChange={sizeFunc} />
             <div>{bdComp.size}px</div>

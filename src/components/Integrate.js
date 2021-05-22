@@ -167,8 +167,8 @@ export function Integrate() {
                 <Width />
                 <Color />
                 <Background />
-                <Padding />
                 <Border />
+                <Padding />
                 <BorderRadius />
             </div>
         </Sheet.Provider>
