@@ -5,22 +5,16 @@ import { sampleValidFunc } from './Sample';
 
 //サンプルデータのCSS in JS
 const style = {
-    width: '200px',
-    background: '#2c51db',
-    padding: '40px 30px',
-    borderRadius:'20px',
-    border:'5px solid #ffffff',
-    /*
-    borderLeft: '1px solid #Df00fE',
-    borderRight: '1px solid #Df00fE',
-    */
-    color: '#f00',
-    boxShadow: '#FC0 10px 10px 10px',
-    display: 'block',
+    width: '150px',
+    background: '#e4f500',
+    padding: '10px 5px',
+    borderLeft: '3px solid #Df00fE',
+    borderRight: '3px solid #Df00fE',
+    color: '#666',
 }
 
 
-export const Sample01 = () => {
+export const Sample02 = () => {
     const [styleState, setStyleDispatch] = useContext(Sheet);
     const defaultData = init()
 
@@ -31,7 +25,7 @@ export const Sample01 = () => {
 
     return (
         <div>
-            <a>サンプル01</a>
+            <a>サンプル02</a>
             <button onClick={selectSampleFunc}>このサンプルを選択する</button>
         </div>
     )
