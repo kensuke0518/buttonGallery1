@@ -21,11 +21,13 @@ export function Cascade() {
     }
 
     const text = '.preview{\n' + chara + '}';
+    const html = '<a href="#" class="preview">' + styleState.character.character + '</a>'
 
     return (
         <div>
             <p style={styleState.componentStyle.heading.a}>下のコードをコピーして貼り付けてください</p>
             <textarea style={areaStyle} value={text} readOnly></textarea>
+            <textarea style={areaStyle} value={html} readOnly></textarea>
         </div>
     )
 }

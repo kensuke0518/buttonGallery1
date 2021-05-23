@@ -1,6 +1,15 @@
 import { useState, useCallback, useContext, useEffect } from 'react';
 import { Sheet } from '../Integrate';
 
+//初期値
+export const bdInitState = {
+    property: 'border',
+    value: {
+        check: [],
+        size: '0',
+        color: '#000000',
+    }
+}
 //ストアで管理するステートの値
 export const bdState = {
     property: 'border',
@@ -98,7 +107,7 @@ export function Border() {
     
     return (
         <div>
-            <p style={styleState.componentStyle.heading.a}>ボーダー</p>
+            <p>ボーダー</p>
             <div>
                 <input type="checkbox" name="" value="top" id="borderTop" checked={bdComp.check.includes('top') ? true : false} onClick={directionFunc} />上
                 <input type="checkbox" name="" value="bottom" id="borderBottom" checked={bdComp.check.includes('bottom') ? true : false} onClick={directionFunc} />下

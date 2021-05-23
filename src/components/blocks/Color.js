@@ -1,11 +1,18 @@
 import { useState, useContext, useEffect } from 'react';
 import { Sheet } from '../Integrate';
 
+//初期値
+export const crInitState = {
+    property: 'color',
+    value: {
+        color: '#666666'
+    }
+}
 //ストアで管理するステートの値
 export const crState = {
     property: 'color',
     value: {
-        color:'#ffffff'
+        color: '#ffffff'
     }
 }
 
@@ -52,7 +59,7 @@ export function Color() {
 
     return (
         <div>
-            <p style={styleState.componentStyle.heading.a}>文字色</p>
+            <p>文字色</p>
             <div><input type="color" value={crComp.color} onChange={colorFunc} /></div>
             <div>{crComp.color}</div>
         </div>

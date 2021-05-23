@@ -28,7 +28,7 @@ export function Character() {
 
     return (
         <div>
-            <p style={styleState.componentStyle.heading.a}>ボタンに入る文字</p>
+            <p>ボタンに入る文字</p>
             <input type="text" value={chComp.character} onChange={characterFunc} />
         </div>
     )

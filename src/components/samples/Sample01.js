@@ -10,12 +10,9 @@ const style = {
     padding: '40px 30px',
     borderRadius:'20px',
     border:'5px solid #ffffff',
-    /*
-    borderLeft: '1px solid #Df00fE',
-    borderRight: '1px solid #Df00fE',
-    */
     color: '#f00',
     boxShadow: '#FC0 10px 10px 10px',
+    textAlign: 'center',
     display: 'block',
 }
 
@@ -31,7 +28,8 @@ export const Sample01 = () => {
 
     return (
         <div>
-            <a>サンプル01</a>
+            
+            <a href="#" style={style}>サンプル01</a>
             <button onClick={selectSampleFunc}>このサンプルを選択する</button>
         </div>
     )

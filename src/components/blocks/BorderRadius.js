@@ -1,6 +1,52 @@
 import { useState, useContext, useEffect } from 'react';
 import { Sheet } from '../Integrate';
 
+//初期値
+export const brInitState = {
+    property: 'borderRadius',
+    value: {
+        horizonVertical: false,
+        style: {
+            a: {
+                checked: false,
+                size: '0',
+                unit: [
+                    { value: 'px', checked: true },
+                    { value: '%', checked: false },
+                    { value: 'rem', checked: false },
+                ],
+            },
+            b: {
+                checked: false,
+                size: '0',
+                unit: [
+                    { value: 'px', checked: true },
+                    { value: '%', checked: false },
+                    { value: 'rem', checked: false },
+                ],
+            },
+            c: {
+                checked: false,
+                size: '0',
+                unit: [
+                    { value: 'px', checked: true },
+                    { value: '%', checked: false },
+                    { value: 'rem', checked: false },
+                ],
+            },
+            d: {
+                checked: false,
+                size: '0',
+                unit: [
+                    { value: 'px', checked: true },
+                    { value: '%', checked: false },
+                    { value: 'rem', checked: false },
+                ],
+            },
+        },
+        sampling: false
+    }
+}
 //ストアで管理するステートの値
 export const brState = {
     property: 'borderRadius',
@@ -208,7 +254,7 @@ export function BorderRadius() {
 
     return (
         <div>
-            <p style={styleState.componentStyle.heading.a}>角丸</p>
+            <p>角丸</p>
             <div>
                 <input type="checkbox" onClick={horizonVerticalFunc} />「水平半径/垂直半径」を使用する。
             </div>

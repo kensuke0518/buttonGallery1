@@ -1,7 +1,14 @@
 import { useState, useCallback, useContext, useEffect } from 'react';
 import { Sheet } from '../Integrate';
 
-//ストアで管理するステートの値
+//初期値
+export const bgInitState = {
+    property: 'background',
+    value: {
+        bgcolor: '#000000',
+    }
+}
+//デフォルト値：ストアで管理するステートの値
 export const bgState = {
     property: 'background',
     value: {
@@ -52,7 +59,7 @@ export function Background() {
     
     return (
         <div>
-            <p style={styleState.componentStyle.heading.a}>ボタンの背景色</p>
+            <p>ボタンの背景色</p>
             <div><input type="color" value={bgComp.bgcolor} onChange={bgColorFunc} /></div>
             <div>{bgComp.bgcolor}</div>
         </div>

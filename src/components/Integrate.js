@@ -1,11 +1,11 @@
 import React,{ useReducer } from 'react';
 import { Character, chState } from './blocks/Character';
-import { Width, wdState } from './blocks/Width';
-import { Color, crState } from './blocks/Color';
-import { Background, bgState } from './blocks/Background';
-import { Padding, pdState } from './blocks/Padding';
-import { Border, bdState } from './blocks/Border';
-import { BorderRadius, brState } from './blocks/BorderRadius';
+import { Width, wdState, wdInitState } from './blocks/Width';
+import { Color, crState, crInitState } from './blocks/Color';
+import { Background, bgState, bgInitState } from './blocks/Background';
+import { Padding, pdState, pdInitState } from './blocks/Padding';
+import { Border, bdState, bdInitState } from './blocks/Border';
+import { BorderRadius, brState, brInitState } from './blocks/BorderRadius';
 import { Preview } from './Preview';
 import { Cascade } from './Cascade';
 import { Sample } from './samples/Sample';
@@ -13,8 +13,28 @@ import './style.css';
 
 export const Sheet = React.createContext()
 
+//初期化設定の関数
+export const init = () => {
+    const states = [wdInitState, crInitState, bgInitState, pdInitState, bdInitState, brInitState];
+    const stateObj = {};
+    states.map(data => {
+        stateObj[data.property] = {
+            obj: {}, //Preview用
+            css: '', //Cascade用
+            comp: data.value, //コンポーネントの値 + Sample用
+        }
+    })
+    stateObj['otherStyle'] = {
+        obj: {},
+        css: '',
+        comp: {},
+    }
+    return stateObj;
+}
+
 //下記関数はexport const にするとSampleで呼び出す際にエラーになる。理由を調べておく
-export function init() {
+//デフォルト値設定の関数
+export const defVal = () => {
     const states = [wdState, crState, bgState, pdState, bdState, brState];
     const stateObj = {};
     states.map(data => {
@@ -31,8 +51,9 @@ export function init() {
     }
     return stateObj;
 }
+
 //新しいスタイル:newStyle
-export const newStyle = init();
+export const newStyle = defVal();
 
 //ステート
 //ステートには「プロパティ名:{プロパティ:値,...}というオブジェクトを渡して、Preview.jsで展開する。

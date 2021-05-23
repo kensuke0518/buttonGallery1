@@ -11,6 +11,8 @@ const style = {
     borderLeft: '3px solid #Df00fE',
     borderRight: '3px solid #Df00fE',
     color: '#666',
+    textAlign:'center',
+    display:'block'
 }
 
 
@@ -25,7 +27,7 @@ export const Sample02 = () => {
 
     return (
         <div>
-            <a>サンプル02</a>
+            <a href="#" style={style}>サンプル02</a>
             <button onClick={selectSampleFunc}>このサンプルを選択する</button>
         </div>
     )

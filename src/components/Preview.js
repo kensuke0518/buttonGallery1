@@ -27,6 +27,7 @@ export function Preview() {
         textDecoration: 'none',
     }
     for (let p in newStyle) {
+        console.log(newStyle[p].obj)
         buttonStyle = {
             ...buttonStyle,
             ...newStyle[p].obj

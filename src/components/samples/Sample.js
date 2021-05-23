@@ -1,25 +1,10 @@
 import { Sample01 } from './Sample01';
 import { Sample02 } from './Sample02';
 
-let otherCSS = []
-let borderCSS = '';
-const borderCheck = [];
-
-/**
- * 課題
- * サンプル変更前にまず初期化して、各プロパティを0の状態にしないといけない。
- * その後にサンプルを適用する
- * でないと、すでに適用されている値が初期化されない。（サンプル2適用で角丸のチェックが消えない）
- */
-
-/**
- * 課題
- * サンプル1を連打すると、「下のコードをコピーして貼り付けてください」部分のotherSyleのコードがどんどん追加されてしまう。
- * やはりこれも初期化が失敗していると思われる。
- */
-
-
 export const sampleValidFunc = (defaultData, style) => {
+    let otherCSS = []
+    let borderCSS = '';
+    const borderCheck = [];
     //変数styleをステートへ送信できる形にする
     for (let prop in style) {
         //変数
@@ -79,8 +64,7 @@ export const sampleValidFunc = (defaultData, style) => {
                     }
                     //スタイルシート
                     let propLower = prop.replace(/([A-Z])/g, '-$1').toLowerCase();
-                    borderCSS = `${propLower}: ${style[prop]};\n`
-                    console.log(borderCSS)
+                    borderCSS = `${borderCSS + propLower}: ${style[prop]};\n`
                     //コンポーネントで使用する値
                     const dir = prop.replace(/border(.+)/g, '$1').toLowerCase();
                     borderCheck.push(dir);
@@ -106,7 +90,6 @@ export const sampleValidFunc = (defaultData, style) => {
                             ...component
                         },
                     };
-                    console.log(defaultData)
                 }
             }
                 break;

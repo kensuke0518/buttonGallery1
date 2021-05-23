@@ -1,6 +1,52 @@
 import { useState, useContext, useEffect } from 'react';
 import { Sheet } from '../Integrate';
 
+//初期値
+export const pdInitState = {
+    property: 'padding',
+    value: {
+        style: {
+            top: {
+                checked: false,
+                size: '0',
+                unit: [
+                    { value: 'px', checked: true },
+                    { value: '%', checked: false },
+                    { value: 'rem', checked: false },
+                ],
+            },
+            right: {
+                checked: false,
+                size: '0',
+                unit: [
+                    { value: 'px', checked: true },
+                    { value: '%', checked: false },
+                    { value: 'rem', checked: false },
+                ],
+            },
+            bottom: {
+                checked: false,
+                size: '0',
+                unit: [
+                    { value: 'px', checked: true },
+                    { value: '%', checked: false },
+                    { value: 'rem', checked: false },
+                ],
+            },
+            left: {
+                checked: false,
+                size: '0',
+                unit: [
+                    { value: 'px', checked: true },
+                    { value: '%', checked: false },
+                    { value: 'rem', checked: false },
+                ],
+            },
+        },
+        sampling: false,
+    }
+}
+
 //ストアで管理するステートの値
 export const pdState = {
     property: 'padding',
@@ -195,7 +241,7 @@ export function Padding() {
 
     return (
         <div>
-            <p style={styleState.componentStyle.heading.a}>余白</p>
+            <p>余白</p>
             <div>
                 <input type="checkbox" name="" value="top" checked={pdComp.style.top.checked} onClick={directionFunc} />上<br />
                 <input type="range" name="top" value={pdComp.style.top.size} min="0" max="100" onChange={sizeFunc} /><br />
@@ -230,7 +276,6 @@ export function Padding() {
                     <input type="radio" value="rem" name="right" checked={pdComp.style.right.unit[2].checked} onChange={unitFunc} />rem
                 </div>
             </div>
-
         </div>
     )
 }

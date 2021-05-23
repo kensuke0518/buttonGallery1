@@ -1,6 +1,14 @@
 import { useState, useContext, useEffect } from 'react';
 import { Sheet } from '../Integrate';
 
+//初期値
+export const wdInitState = {
+    property: 'width',
+    value: {
+        size: '0',
+        unit: 'px',
+    }
+}
 //ストアで管理するステートの値
 export const wdState = {
     property: 'width',
@@ -56,8 +64,8 @@ export function Width() {
 
     return (
         <div>
-            <p style={styleState.componentStyle.heading.a}>幅</p>
-            <input type="range" value={wdComp.size} style={{ width: '300px' }} min="0" max="600" onChange={sizeFunc} />
+            <p>幅</p>
+            <input type="range" value={wdComp.size} min="0" max="600" onChange={sizeFunc} />
             <div>{wdComp.size}px</div>
         </div>
     )

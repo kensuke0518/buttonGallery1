@@ -1,14 +1,17 @@
 .block{
     display: flex;
     flex-wrap: wrap;
+    font-size: 14px;
 }
 .block > div{
     width: 300px;
-    padding:10px
+    padding:5px;
+    margin: 5px;
+    background-color: azure;
 }
-.block > div:nth-child(even){
-    background:rgb(166, 171, 248);
+.block > div > p{
+    margin: 0;
 }
-.block > div:nth-child(odd){
-    background:rgb(222, 245, 94);
+input[type="range"]{
+    width: 100%;
 }
