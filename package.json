@@ -1,6 +1,7 @@
 {
-  "name": "buttongallery",
+  "name": "buttongallery1",
   "version": "0.1.0",
+  "homepage": "https://kensuke0518.github.io/buttonGallery1/",
   "private": true,
   "dependencies": {
     "@simonwep/pickr": "^1.8.0",
