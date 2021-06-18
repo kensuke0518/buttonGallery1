@@ -291,7 +291,7 @@ export const sampleValidFunc = (defaultData, style) => {
 
 export const Sample = () => {
     return (
-        <div>
+        <div className="c-samples">
             <Sample01 />
             <Sample02 />
         </div>

@@ -255,9 +255,9 @@ export function BorderRadius() {
     return (
         <div>
             <p>角丸</p>
-            <div>
+            {/* <div>
                 <input type="checkbox" onClick={horizonVerticalFunc} />「水平半径/垂直半径」を使用する。
-            </div>
+            </div> */}
             <div>
                 <input type="checkbox" value="a" onChange={radiusUseFunc} checked={brComp.style.a.checked} />A<br />
                 <input type="range" name="a" value={brComp.style.a.size} onChange={sizeFunc} />

@@ -1,3 +1,30 @@
+.App{
+    width: 1000px;
+    margin: auto;
+}
+.c-samples{
+    display: flex;
+    align-items: center;
+}
+.c-sample{
+    margin: 10px 20px;
+}
+.c-sample__button{
+    margin: 20px auto 0;
+    display: block;
+}
+.c-disp{
+    display: flex;
+    justify-content: space-between;
+}
+.c-preview__box{
+    width: 650px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+}
 .block{
     display: flex;
     flex-wrap: wrap;

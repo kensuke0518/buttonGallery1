@@ -12,6 +12,7 @@ const style = {
     borderRight: '3px solid #Df00fE',
     color: '#666',
     textAlign:'center',
+    textDecoration: 'none',
     display:'block'
 }
 
@@ -26,9 +27,9 @@ export const Sample02 = () => {
     }
 
     return (
-        <div>
+        <div className="c-sample c-sample02">
             <a href="#" style={style}>サンプル02</a>
-            <button onClick={selectSampleFunc}>このサンプルを選択する</button>
+            <button onClick={selectSampleFunc} className="c-sample__button">このサンプルを選択する</button>
         </div>
     )
 }

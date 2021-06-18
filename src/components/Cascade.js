@@ -14,20 +14,26 @@ export function Cascade() {
     }
 
     let chara = '';
+    const buttonStyle = 'display:block;\ntext-align:center;\ntext-decoration:none;\n'
     for (let p in newStyle) {
         if (newStyle[p].css !== undefined) {
             chara = chara + newStyle[p].css;
         }
     }
+    chara = chara + buttonStyle;
 
     const text = '.preview{\n' + chara + '}';
     const html = '<a href="#" class="preview">' + styleState.character.character + '</a>'
 
     return (
-        <div>
+        <div className="c-cascade">
             <p style={styleState.componentStyle.heading.a}>下のコードをコピーして貼り付けてください</p>
-            <textarea style={areaStyle} value={text} readOnly></textarea>
-            <textarea style={areaStyle} value={html} readOnly></textarea>
+            <div>
+                <textarea style={areaStyle} value={text} readOnly></textarea>
+            </div>
+            <div>
+                <textarea style={areaStyle} value={html} readOnly></textarea>
+            </div>
         </div>
     )
 }

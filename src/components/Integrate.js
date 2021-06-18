@@ -29,7 +29,6 @@ export const init = () => {
         css: '',
         comp: {},
     }
-    console.log(stateObj)
     return stateObj;
 }
 
@@ -67,7 +66,8 @@ const initialState = {
             a: {
                 borderLeft: '4px solid #58d510',
                 background: '#fff',
-                paddingLeft: '.5em'
+                paddingLeft: '.5em',
+                margin: '0 0 10px'
             }
         }
     }
@@ -157,16 +157,18 @@ export function Integrate() {
     return (
         <Sheet.Provider value={[state, dispatch]}>
             <Sample />
-            <Preview />
-            <Cascade />
+            <div className="c-disp">
+                <Preview />
+                <Cascade />
+            </div>
             <div className="block">
                 <Character />
                 <Width />
                 <Color />
                 <Background />
-                <Border />
                 <Padding />
                 <BorderRadius />
+                <Border />
             </div>
         </Sheet.Provider>
     )

@@ -10,12 +10,6 @@ export function Preview() {
 
     //コンポーネントのスタイル
     const style = {
-        width: '500px',
-        height: '300px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        border: '1px solid #ddd',
         background: bgColorState,
     }
 
@@ -27,7 +21,6 @@ export function Preview() {
         textDecoration: 'none',
     }
     for (let p in newStyle) {
-        console.log(newStyle[p].obj)
         buttonStyle = {
             ...buttonStyle,
             ...newStyle[p].obj
@@ -43,8 +36,8 @@ export function Preview() {
     const stopLink = e => e.preventDefault();
 
     return (
-        <div>
-            <div style={style}>
+        <div className="c-preview">
+            <div className="c-preview__box" style={style}>
                 <a href="#" onClick={stopLink} className="preview" style={buttonStyle}>{styleState.character.character}</a>
             </div>
             <input type="color" defaultValue={bgColorState} onChange={ bgColorFunc }/>
