@@ -38,7 +38,7 @@ export function Preview() {
     return (
         <div className="c-preview">
             <div className="c-preview__box" style={style}>
-                <a href="#" onClick={stopLink} className="preview" style={buttonStyle}>{styleState.character.character}</a>
+                <a href="/" onClick={stopLink} className="preview" style={buttonStyle}>{styleState.character.character}</a>
             </div>
             <input type="color" defaultValue={bgColorState} onChange={ bgColorFunc }/>
         </div>

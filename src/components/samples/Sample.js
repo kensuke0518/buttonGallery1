@@ -38,7 +38,7 @@ export const sampleValidFunc = (defaultData, style) => {
             case 'borderTop':
             case 'borderBottom':
             case 'borderLeft':
-            case 'borderRight': {
+            case 'borderRight': 
                 if (prop === 'border') {
                     //オブジェクト
                     object = { [prop]: style[prop] }
@@ -91,7 +91,6 @@ export const sampleValidFunc = (defaultData, style) => {
                         },
                     };
                 }
-            }
                 break;
 
             case 'background': {

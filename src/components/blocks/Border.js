@@ -1,4 +1,4 @@
-import { useState, useCallback, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Sheet } from '../Integrate';
 
 //初期値
@@ -65,12 +65,12 @@ export function Border() {
     //CSS
     function bdCSS(newState = bdComp) {
         //オブジェクトで示す。
-        const obj = {}
+        let obj = {}
         if (newState.check.length === 4) {
             obj['border'] = `${newState.size}px solid ${newState.color}`
         }
         else if (1 < newState.check.length < 4) {
-            newState.check.map(tblr => {
+            newState.check.forEach(tblr => {
                 const newTblr = tblr.charAt(0).toUpperCase() + tblr.slice(1);
                 obj['border' + newTblr] = `${newState.size}px solid ${newState.color}`
             })

@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Sheet } from '../Integrate';
 
 //初期値
@@ -104,12 +104,12 @@ export function BorderRadius() {
     const brComp = styleState.newStyle.borderRadius.comp;
 
     //水平垂直
-    const horizonVerticalFunc = e => {
+    /* const horizonVerticalFunc = e => {
         const newState = {
             ...brComp,
             horizonVertical: e.target.checked
         }
-    }
+    } */
 
     //各頂点を使うかどうか
     const radiusUseFunc = e => {
@@ -248,9 +248,7 @@ export function BorderRadius() {
         setStyleDispatch({ type: 'br', value })
     }
 
-    useEffect(() => {
-        brCSS();
-    }, [])
+    useEffect(() => { brCSS() }, []);
 
     return (
         <div>

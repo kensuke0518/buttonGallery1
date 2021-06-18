@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import React,{ useReducer } from 'react';
 import { Character, chState } from './blocks/Character';
 import { Width, wdState, wdInitState } from './blocks/Width';
@@ -17,7 +18,7 @@ export const Sheet = React.createContext()
 export const init = () => {
     const states = [wdInitState, crInitState, bgInitState, pdInitState, bdInitState, brInitState];
     const stateObj = {};
-    states.map(data => {
+    states.forEach(data => {
         stateObj[data.property] = {
             obj: {}, //Preview用
             css: '', //Cascade用
@@ -37,7 +38,7 @@ export const init = () => {
 export const defVal = () => {
     const states = [wdState, crState, bgState, pdState, bdState, brState];
     const stateObj = {};
-    states.map(data => {
+    states.forEach(data => {
         stateObj[data.property] = {
             obj: {}, //Preview用
             css: '', //Cascade用
@@ -129,7 +130,7 @@ const reducer = (state, action) => {
                 ...state,
                 character: action.value
             }
-        case 'cu': 
+        case 'cu':
             return {
                 ...state,
                 componentUnit: {
@@ -138,7 +139,6 @@ const reducer = (state, action) => {
                 }
             }
         case 'sample':
-            console.log(action.value)
             return {
                 ...state,
                 newStyle: {
@@ -146,8 +146,6 @@ const reducer = (state, action) => {
                     ...action.value
                 }
             }
-        defalut:
-            break;
     }
 }
 

@@ -19,7 +19,7 @@ const style = {
 
 
 export const Sample01 = () => {
-    const [styleState, setStyleDispatch] = useContext(Sheet);
+    const [, setStyleDispatch] = useContext(Sheet);
     const defaultData = init()
 
     const selectSampleFunc = () => {
@@ -29,7 +29,7 @@ export const Sample01 = () => {
 
     return (
         <div className="c-sample c-sample01">
-            <a href="#" style={style}>サンプル01</a>
+            <a href="/" style={style}>サンプル01</a>
             <button onClick={selectSampleFunc} className="c-sample__button">このサンプルを選択する</button>
         </div>
     )
