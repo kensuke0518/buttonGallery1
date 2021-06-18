@@ -22,7 +22,7 @@ export function Preview() {
     //ボタンのスタイルをストアから取得
     const newStyle = styleState.newStyle
     let buttonStyle = {
-        display: 'inline-block',
+        display: 'block',
         textAlign: 'center',
         textDecoration: 'none',
     }

@@ -29,6 +29,7 @@ export const init = () => {
         css: '',
         comp: {},
     }
+    console.log(stateObj)
     return stateObj;
 }
 
